@@ -16,7 +16,7 @@
 
 
 //Prototipo das Funções
-//void fCriapeca
+void fMostra(int M[2][14]);
 
  
 //Criar e mostras a peças.
@@ -32,10 +32,15 @@ typedef struct stpeca
 
 //Criar e mostrar as peças.
 
-int main() {
+int main() 
+{
 	
 	srand(time(NULL));
-	
+	int Mat[2][14]; 
+	int i,j; 
+	int n = 1;
+	fMostra(Mat);
+
     stpeca pecas[28];
     int indice = 0;
 
@@ -61,6 +66,17 @@ int main() {
     
     
     
+}
+
+void fMostra(int M[2][14])
+{
+	for(int i = 0; i < 2; i++)
+	{
+		for(int j = 0; j < 14; j++)
+			printf("%2d ", rand() % 6, M[i][j]);
+		printf("\n");
+	}
+	printf("\n\n");	
 }
 
 	
