@@ -8,13 +8,6 @@
 
 
 //Primeira Versão: 
-
-
-
-
-
-
-
 //Prototipo das Funções
 void fMostra(int M[2][14]);
 
@@ -39,7 +32,7 @@ int main()
 	int Mat[2][14]; 
 	int i,j; 
 	int n = 1;
-	fMostra(Mat);
+	
 
     stpeca pecas[28];
     int indice = 0;
@@ -68,16 +61,7 @@ int main()
     
 }
 
-void fMostra(int M[2][14])
-{
-	for(int i = 0; i < 2; i++)
-	{
-		for(int j = 0; j < 14; j++)
-			printf("%2d ", rand() % 6, M[i][j]);
-		printf("\n");
-	}
-	printf("\n\n");	
-}
+
 
 	
 	
