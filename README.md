@@ -53,11 +53,10 @@ void fNumera(tipopeca pecas[28]) {
 void fEmbaralha(tipopeca pecas[28]) {
     srand(time(NULL));
     
-    for (int i = 27; i > 0; i--) {
-        int j = rand() % (i + 1);
+    for (int i = 0; i < 28; i++) {
+        int j = rand() % 28;
         
-        //Troca as pecas de lugar
-        tipopeca temp = pecas[i];
+        tipopeca temp = pecas[i];  //troca as pecas de lugar
         pecas[i] = pecas[j];
         pecas[j] = temp;
     }
