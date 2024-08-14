@@ -19,24 +19,26 @@ void fMostra(tipopeca pecas[28]);
 void fNumera(tipopeca pecas[28]);
 void fEmbaralha(tipopeca pecas[28]);
 
-int main() {
+
+ int main() {
     tipopeca pecas[28];
-    int novamente;
     
-    do {
-        system("cls");
-		fNumera(pecas);      //inicia as pecas
-        printf("Pecas antes de embaralhar:\n\n");
-        fMostra(pecas);      //peças numeradas
-        fEmbaralha(pecas);   //embaralha as pecas
-        printf("\n\nPecas depois de embaralhar:\n\n");
-        fMostra(pecas);      //pecas embaralhadas
-        printf("\n\n");
+	fCriar(pecas);      //inicia as pecas
+	fMostra(pecas);      //peças numeradas
+    	printf("\n\n");
         
-        printf("Deseja embaralhar novamente? digite 0: ");
-        scanf("%d", &novamente);
+    	fEmbaralha(pecas);   //embaralha as pecas
+    	fMostra(pecas);      //pecas embaralhadas
         
-    } while (novamente == 0);
+    	printf("\n\n");
+    
+    	fEmbaralha(pecas);   //embaralha as pecas
+    	fMostra(pecas);      //pecas embaralhadas
+    	printf("\n\n");
+    
+    	fEmbaralha(pecas);   //embaralha as pecas
+    	fMostra(pecas);      //pecas embaralhadas
+    	printf("\n\n");
 }
 
 void fMostra(tipopeca pecas[28]) {
