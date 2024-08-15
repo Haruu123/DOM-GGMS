@@ -1,4 +1,4 @@
-//DOM-GGMS - Projeto Dominó 
+//DOM-GGMS-Controller - Projeto Dominó 
 //09/08/2024 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
