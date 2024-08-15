@@ -16,7 +16,7 @@ typedef struct {
 } tipopeca;
 
 void fMostra(tipopeca pecas[28]);
-void fNumera(tipopeca pecas[28]);
+void fCriar(tipopeca pecas[28]);
 void fEmbaralha(tipopeca pecas[28]);
 
 
@@ -47,7 +47,7 @@ void fMostra(tipopeca pecas[28]) {
     }
 }
 
-void fNumera(tipopeca pecas[28]) {
+void fCriar(tipopeca pecas[28]) {
     int k = 0;
     
     for (int i = 0; i <= 6; i++) {
