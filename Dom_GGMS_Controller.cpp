@@ -5,6 +5,8 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
+#include <time.h>
+
 void jogo()
 {
     fMostra();
