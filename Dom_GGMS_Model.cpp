@@ -5,6 +5,8 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
+#include"DOM_GGMS_Model.h"
+
 //estrutura tipo peca
 typedef struct {
     int lado1;
