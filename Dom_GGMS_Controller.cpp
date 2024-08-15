@@ -1,3 +1,17 @@
+void jogo()
+{
+    fMostra();
+    fEmbaralha();
+    
+    fMostra();
+    fEmbaralha();
+    
+    fMostra();
+    fEmbaralha();
+}
+
+
+
 void fEmbaralha(tipopeca pecas[28]) {
     srand(time(NULL));
     
