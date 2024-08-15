@@ -6,7 +6,6 @@
 //Sthefany Viveiros Cordeiro
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 //estrutura tipo peca
