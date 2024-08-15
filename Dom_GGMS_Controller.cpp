@@ -1,3 +1,10 @@
+//DOM-GGMS - Projeto Dominó 
+//09/08/2024 - Grupo: GGMS
+//Gabriel Azevedo Cruz 
+//Giulia Meninel Mattedi
+//Matheus Gomes Costa Castanho Giacomini
+//Sthefany Viveiros Cordeiro
+
 void jogo()
 {
     fMostra();
@@ -9,8 +16,6 @@ void jogo()
     fMostra();
     fEmbaralha();
 }
-
-
 
 void fEmbaralha(tipopeca pecas[28]) {
     srand(time(NULL));
