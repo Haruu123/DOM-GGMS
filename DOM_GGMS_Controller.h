@@ -6,3 +6,4 @@
 //Sthefany Viveiros Cordeiro
 
 void fEmbaralha(tipopeca pecas[28]);
+void jogo();
