@@ -5,8 +5,8 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
-#include"Dom_GGMS_Model.cpp"
-#include"Dom_GGMS_Controller.cpp"
+#include"DOM_GGMS_Model.cpp"
+#include"DOM_GGMS_Controller.cpp"
 
 int main() {
   fCriar();
