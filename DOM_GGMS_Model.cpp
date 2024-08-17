@@ -5,7 +5,7 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
-#include"DOM_GGMS_Model.h"
+#include "DOM_GGMS_Model.h"
 
 tipopeca pecas[28];
 
