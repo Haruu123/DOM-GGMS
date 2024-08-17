@@ -5,6 +5,8 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
+#include "DOM_GGMS_Controller.h"
+#include "DOM_GGMS_View.cpp"
 #include <time.h>
 
 void jogo()
