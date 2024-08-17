@@ -5,10 +5,10 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
-#include"DOM_GGMS_Model.cpp"
-#include"DOM_GGMS_Controller.cpp"
+#include "DOM_GGMS_Model.cpp"
+#include "DOM_GGMS_Controller.cpp"
 
-int main() {
-  fCriar(pecas);
-  jogo();
+int main(){
+	fCriar(pecas);
+	jogo();
 }
