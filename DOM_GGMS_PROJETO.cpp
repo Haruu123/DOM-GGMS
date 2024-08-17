@@ -9,6 +9,6 @@
 #include"DOM_GGMS_Controller.cpp"
 
 int main() {
-  fCriar();
+  fCriar(pecas);
   jogo();
 }
