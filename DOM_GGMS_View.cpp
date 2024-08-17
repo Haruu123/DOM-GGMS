@@ -5,6 +5,7 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
+#include "DOM_GGMS_View.h"
 #include <stdio.h>
 
 void fMostra(tipopeca pecas[28]) {
