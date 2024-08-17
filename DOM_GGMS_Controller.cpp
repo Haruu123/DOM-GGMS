@@ -7,18 +7,20 @@
 
 #include "DOM_GGMS_Controller.h"
 #include "DOM_GGMS_View.cpp"
+#include <stdlib.h>
 #include <time.h>
 
-void jogo()
-{
-    fMostra();
-    fEmbaralha();
+void jogo(){
+    fMostra(pecas);
+    fEmbaralha(pecas);
     
-    fMostra();
-    fEmbaralha();
+    fMostra(pecas);
+    fEmbaralha(pecas);
     
-    fMostra();
-    fEmbaralha();
+    fMostra(pecas);
+    fEmbaralha(pecas);
+    
+    fMostra(pecas);
 }
 
 void fEmbaralha(tipopeca pecas[28]) {
