@@ -7,11 +7,7 @@
 
 #include"DOM_GGMS_Model.h"
 
-//estrutura tipo peca
-typedef struct {
-    int lado1;
-    int lado2;
-} tipopeca;
+tipopeca pecas[28];
 
 void fCriar(tipopeca pecas[28]) {
     int k = 0;
