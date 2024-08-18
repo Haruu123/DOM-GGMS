@@ -1,4 +1,4 @@
-//DOM-GGMS-Model.h - Projeto Dominó 
+//DOM-GGMS-Model.h - Projeto Dominó - Etapa 2
 //09/08/2024 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
