@@ -60,7 +60,7 @@ void menuGeral()                                // função para visualizar o me
 			case 0:
 				sair();
 				break;
-        } return 0;
+        	} while(op != 0);
 	}
 				
 				
