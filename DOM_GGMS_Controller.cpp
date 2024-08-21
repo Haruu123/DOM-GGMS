@@ -35,3 +35,7 @@ void fEmbaralha(tipopeca pecas[28]) {
         pecas[j] = temp;
     }
 }
+
+// void iniciarJogo() {
+
+// }
