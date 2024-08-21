@@ -12,4 +12,9 @@ typedef struct {
     char status; //NULL = indisponivel, 1 = player1, 2 = player2, M = localizado na mesa
 } tipopeca;
 
+struct Mesa {
+    int mesaE;
+    int mesaD;
+} mesa; 
+
 void fCriar(tipopeca pecas[28]);
