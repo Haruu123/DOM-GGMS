@@ -9,6 +9,7 @@
 typedef struct {
     int lado1;
     int lado2;
+    char status; //NULL = indisponivel, 1 = player1, 2 = player2, M = localizado na mesa
 } tipopeca;
 
 void fCriar(tipopeca pecas[28]);
