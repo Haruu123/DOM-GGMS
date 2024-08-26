@@ -7,7 +7,9 @@
 
 #include "DOM_GGMS_Model.h"
 
+Mesa mesa[28];
 tipopeca pecas[28];
+int j1[7], j2[7];
 
 void fCriar(tipopeca pecas[28]) {
     int k = 0;
@@ -20,3 +22,18 @@ void fCriar(tipopeca pecas[28]) {
         }
     }
 }
+
+void distribuiPecas() {
+    for (int i = 0; i < 7; i++) {
+        jogador1[i] = i;             
+        jogador2[i] = i + 7;         
+    }
+}
+
+//void exibePecas() {
+//    for (int i = 0; i < 7; i++) {
+//        tipopeca pecas = pecas[jogador[]];
+//        printf("[%d|%d] ", pecas.lado1, pecas.lado2);
+//    }
+//    printf("\n");
+//} /////ESBOCO NAO FUNFA 
