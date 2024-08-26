@@ -11,16 +11,7 @@
 #include <time.h>
 
 void jogo(){
-    fMostra(pecas);
-    fEmbaralha(pecas);
     
-    fMostra(pecas);
-    fEmbaralha(pecas);
-    
-    fMostra(pecas);
-    fEmbaralha(pecas);
-    
-    fMostra(pecas);
 }
 
 void fEmbaralha(tipopeca pecas[28]) {
@@ -36,36 +27,30 @@ void fEmbaralha(tipopeca pecas[28]) {
     }
 }
 
-void menuGeral()                                // função para visualizar o menu
+void menuGeral()
 {
-	int op;
-	do
-	{
-		printf("+------------------------------------------------------------------------+\n");
-		printf("| (1) - jogar:		                         	 |\n");
-//		printf("| (2) - novo jogo:     		                         |\n");
-//		printf("| (3) - carregar jogo:      			                 |\n");
-//		printf("| (5) - :			         |\n");
-//		printf("| (6) - :                                          |\n");
-//		printf("| (7) - :		                 |\n");
-		printf("| (0) - sair :		                                 |\n");
-		printf("+------------------------------------------------------------------------+\n");
-		scanf("%d", &op);
-		
-		switch(op) 
-		{
-			case 1:
-				iniciarJogo();
-				break;
-			case 0:
-				sair();
-				break;
-        	} while(op != 0);
-	}
-				
-				
+int op = apresentarMenuGeral();
+	
+    switch (op) {
+        case 1:
+            iniciarJogo;  
+            break;
+        case 2:
+            jogadaAutomatica();
+            break;
+        case 3:
+            printf("sair");
+            exit(0);  // Encerra o jogo
+        default:
+            printf("de novo\n");
+            menuGeral();  
+            break;
+    }
 }
 
-// void iniciarJogo() {
-
-// }
+//void iniciarJogo()
+//{
+//	limparMesa();
+//	fEmbaralha();
+//	distribuiPecas();
+//}	
