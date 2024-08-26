@@ -40,7 +40,7 @@ int op = apresentarMenuGeral();
             break;
         case 3:
             printf("sair");
-            exit(0);  // Encerra o jogo
+            exit(0);  
         default:
             printf("de novo\n");
             menuGeral();  
