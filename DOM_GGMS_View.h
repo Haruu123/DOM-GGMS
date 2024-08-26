@@ -6,4 +6,4 @@
 //Sthefany Viveiros Cordeiro
 
 void fMostra(tipopeca pecas[28]);
-void menuGeral();
+void apresentarMenuGeral();
