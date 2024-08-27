@@ -15,8 +15,10 @@ typedef struct {
 typedef struct {
     int mesaE;
     int mesaD;
+    int posicaoLivreMesa;
+    tipopeca pecasNaMesa[28];  
 } Mesa; 
 
 void fCriar(tipopeca pecas[28]);
 void distribuiPecas();
-void exibePecas();
+
