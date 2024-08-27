@@ -8,8 +8,9 @@
 #include "DOM_GGMS_Model.cpp"
 #include "DOM_GGMS_Controller.cpp"
 
-int main(){
+int main()
+{
 	fCriar(pecas);
-    	jogo();
-    	return 0;
+	jogo();
+	return 0;
 }
