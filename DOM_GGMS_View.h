@@ -6,4 +6,10 @@
 //Sthefany Viveiros Cordeiro
 
 void fMostra(tipopeca pecas[28]);
-void apresentarMenuGeral();
+void mensagemSair();
+void mensagemOpInvalida();
+void pecasJ1();
+void pecasJ2();
+void jogada1();
+int apresentarMenuGeral();
+
