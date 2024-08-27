@@ -10,5 +10,6 @@
 
 int main(){
 	fCriar(pecas);
-	jogo();
+    	jogo();
+    	return 0;
 }
