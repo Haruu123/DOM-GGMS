@@ -5,6 +5,9 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
-void fEmbaralha(tipopeca pecas[28]);
 void jogo();
+void fEmbaralha(tipopeca pecas[28]);
 void iniciarJogo();
+void colocarPecaNaMesa(tipopeca peca);
+void primeiroLance();
+void menuGeral();
