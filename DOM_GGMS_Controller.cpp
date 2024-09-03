@@ -276,9 +276,7 @@ void jogada() {
     }
 
     // pode ou nao pode
-    if (mesa.posicaoLivreMesa > 0 && 
-        (pecaEscolhida.lado1 == mesa.pecasNaMesa[0].lado1 || pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1 || 
-         pecaEscolhida.lado1 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2 || pecaEscolhida.lado2 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2)) {
+    if (mesa.posicaoLivreMesa > 0 && (pecaEscolhida.lado1 == mesa.pecasNaMesa[0].lado1 || pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1 || pecaEscolhida.lado1 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2 || pecaEscolhida.lado2 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2)) {
         
         if (pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1) {
             inverterPeca(pecaEscolhida);
