@@ -20,5 +20,6 @@ typedef struct {
 } Mesa; 
 
 void fCriar(tipopeca pecas[28]);
-void distribuiPecas();
+void distribuiPecas(tipopeca pecas[28]);
+
 
