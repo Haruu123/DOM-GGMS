@@ -18,6 +18,6 @@ void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int
 void pepecasPecas(char jvez);
 void jogada();
 void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jogadorAtivo);
-
-
+void vencedor();
+void podeJogarOuNao();
 
