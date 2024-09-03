@@ -98,11 +98,11 @@ void primeiroLance() {
         jvez = 'J';
     }
  
-    pepecasPecas(jvez); // pecas de quem jogou
+    indicePecas(jvez); // pecas de quem jogou
     subMenu();
 }
  
-void pepecasPecas(char jvez) {
+void indicePecas(char jvez) {
     char indice = 'a'; // inicio ordem jogador1 
     if (jvez == 'J') {
         pecasJ1();
@@ -176,7 +176,7 @@ void subMenu() {
                 } else {
                     fComprar(monte, numeroPecasNoMonte, jogador2, numeroPecasDoJogador2);
                 }
-                pepecasPecas(jvez);
+                indicePecas(jvez);
                 break;
             case 'p':
                 if (jvez == 'J') {
@@ -185,7 +185,7 @@ void subMenu() {
                     jvez = 'J'; // Passa a vez para o jogador 1
                 }
                 printf("jogador passou a vez\n");
-                pepecasPecas(jvez); // atualiza as peças para o jogador que agora tem a vez
+                indicePecas(jvez); // atualiza as peças para o jogador que agora tem a vez
                 break;
             case 's':
                 menuGeral();
@@ -242,8 +242,6 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
         }
         printf("\n");
     }
-
-
 
 void vencedor() {
     if (numeroPecasDoJogador1 == 0) {
@@ -394,7 +392,7 @@ void jogada() {
         jvez = 'J';
     }
 
-    pepecasPecas(jvez);
+    indicePecas(jvez);
 }
 
 
