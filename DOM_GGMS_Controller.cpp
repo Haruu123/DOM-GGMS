@@ -203,36 +203,6 @@ void inverterPeca(tipopeca &peca) {
     peca.lado2 = temp;
 }
 
-//void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
-//    int mesaE, mesaD;
-// 
-//    if (mesa.posicaoLivreMesa > 0) {
-//        mesaE = mesa.pecasNaMesa[0].lado1;
-//        mesaD = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
-//    } else {
-//        mesaE = mesaD = -1; // mesa vazia
-//    }
-// 
-//    if (jvez == 'J') {
-//        printf("pecas possiveis do Jogador 1:\n");
-//        for (int i = 0; i < numeroPecasDoJogador1; i++) {
-//            if (jogador1[i].lado1 == mesaE || jogador1[i].lado2 == mesaE || jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
-//                // mostra sem inverter
-//                printf(" [%d|%d] ", jogador1[i].lado1, jogador1[i].lado2);
-//            }
-//        }
-//        printf("\n");
-//    } else {
-//        printf("pecas possiveis do Jogador 2:\n");
-//        for (int i = 0; i < numeroPecasDoJogador2; i++) {
-//            if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
-//                // mostra sem inverter
-//                printf(" [%d|%d] ", jogador2[i].lado1, jogador2[i].lado2);
-//            }
-//        }
-//        printf("\n");
-//    }
-//}
 void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
     int mesaE, mesaD;
 	int jogadaValida = 0;
