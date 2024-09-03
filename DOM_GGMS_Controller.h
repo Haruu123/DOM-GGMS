@@ -11,3 +11,13 @@ void iniciarJogo();
 void colocarPecaNaMesa(tipopeca peca);
 void primeiroLance();
 void menuGeral();
+void inverterPeca(tipopeca &peca);
+void subMenu();
+void limparBuffer();
+void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int &numeroPecasDoJogador);
+void pepecasPecas(char jvez);
+void jogada();
+void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jogadorAtivo);
+
+
+
