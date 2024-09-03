@@ -28,7 +28,6 @@ void fEmbaralha(tipopeca pecas[28]) {
 void iniciarJogo() {
     fEmbaralha(pecas);
     distribuiPecas(pecas);
- 
     primeiroLance();
 }
  
@@ -38,35 +37,6 @@ void colocarPecaNaMesa(tipopeca peca) {
         mesa.pecasNaMesa[mesa.posicaoLivreMesa] = peca; //peca vai pra posicao do contador
         mesa.posicaoLivreMesa++; //incremento = avanca o slot da mesa
     }
-}
- 
-void subMenu() {
-    char op2;
-    do {
-        op2 = apresentarSubMenu();
-        switch (op2) {
-            case 'j':
-                //jogar();
-                break;
-            case 'c':
-                if (jvez == 'J') {
-                    fComprar(monte, numeroPecasNoMonte, jogador1, numeroPecasDoJogador1);
-                } else {
-                    fComprar(monte, numeroPecasNoMonte, jogador2, numeroPecasDoJogador2);
-                }
-                pepecasPecas(jvez);
-                break;
-            case 'p':
-            	//passa
-                break;
-            case 's':
-                menuGeral();
-                break;
-            default:
-                mensagemOpInvalida();
-                break;
-        }
-    } while (op2 != 's');
 }
  
 void primeiroLance() {
@@ -89,7 +59,7 @@ void primeiroLance() {
         }
     }
  
-    // Se não tiver dupla, procurar a peça com a maior soma
+    // Se não tiver dupla, procurar a peca com a maior soma
     if (pj == -1) {
         dupla = 0;
         for (i = 0; i < 7; i++) {
@@ -117,7 +87,7 @@ void primeiroLance() {
     }
  
     colocarPecaNaMesa(pecaJogada);
-    apresentarMesa(pecaJogada);
+    apresentarMesa();
  
     //troca vez de jogar
     if (jvez == 'J') {
@@ -155,6 +125,7 @@ void pepecasPecas(char jvez) {
  
  
 void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int &numeroPecasDoJogador) {
+
     if (numeroPecasNoMonte > 0) {
         jogador[numeroPecasDoJogador] = monte[numeroPecasNoMonte - 1];
         jogador[numeroPecasDoJogador].status = 'J'; // peca era D virou J : pertence ao jogador
@@ -163,8 +134,8 @@ void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int
     } else {
         mensagemMonteVazio();
     }
-}
- 
+    apresentarMesa(); // mostrar a mesa atualizada
+} 
  
 void menuGeral() {
     int op;
@@ -191,4 +162,162 @@ void menuGeral() {
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void subMenu() {
+    char op2;
+    do {
+        op2 = apresentarSubMenu();
+        switch (op2) {
+            case 'j':
+                jogada();
+                break;
+            case 'c':
+                if (jvez == 'J') {
+                    fComprar(monte, numeroPecasNoMonte, jogador1, numeroPecasDoJogador1);
+                } else {
+                    fComprar(monte, numeroPecasNoMonte, jogador2, numeroPecasDoJogador2);
+                }
+                pepecasPecas(jvez);
+                break;
+            case 'p':
+                if (jvez == 'J') {
+                    jvez = 'j'; // passa a vez para o jogador 2
+                } else {
+                    jvez = 'J'; // Passa a vez para o jogador 1
+                }
+                printf("jogador passou a vez\n");
+                pepecasPecas(jvez); // atualiza as peças para o jogador que agora tem a vez
+                break;
+            case 's':
+                menuGeral();
+                break;
+            default:
+                mensagemOpInvalida();
+                break;
+        }
+    } while (op2 != 's');
+}
+
+void inverterPeca(tipopeca &peca) {
+    int temp = peca.lado1;
+    peca.lado1 = peca.lado2;
+    peca.lado2 = temp;
+}
+
+void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
+    int mesaE, mesaD;
+ 
+    if (mesa.posicaoLivreMesa > 0) {
+        mesaE = mesa.pecasNaMesa[0].lado1;
+        mesaD = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
+    } else {
+        mesaE = mesaD = -1; // mesa vazia
+    }
+ 
+    
+    if (jvez == 'J') {
+        printf("pecas possiveis do Jogador 1:\n");
+        for (int i = 0; i < numeroPecasDoJogador1; i++) {
+            if (jogador1[i].lado1 == mesaE || jogador1[i].lado2 == mesaE || jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
+                if (jogador1[i].lado1 == mesaD) {
+                    inverterPeca(jogador1[i]);
+                }
+                printf(" [%d|%d] ", jogador1[i].lado1, jogador1[i].lado2);
+            }
+        }
+        printf("\n");
+    } else {
+        printf("pecas possiveis do Jogador 2:\n");
+        for (int i = 0; i < numeroPecasDoJogador2; i++) {
+            if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
+                if (jogador2[i].lado1 == mesaD) {
+                    inverterPeca(jogador2[i]);
+                }
+                printf(" [%d|%d] ", jogador2[i].lado1, jogador2[i].lado2);
+            }
+        }
+        printf("\n");
+    }
+}
+void jogada() {
+    tipopeca pecaEscolhida;
+    int indicePecaEscolhida;
+    char escolha;
+
+
+    mostrarPecasPossiveis(jogador1, jogador2, jvez);
+
+    
+    printf("peca a ser jogada (digite a letra): ");
+    scanf(" %c", &escolha);
+
+
+    if (jvez == 'J') {
+        indicePecaEscolhida = escolha - 'a'; 
+        if (indicePecaEscolhida >= 0 && indicePecaEscolhida < numeroPecasDoJogador1) {
+            pecaEscolhida = jogador1[indicePecaEscolhida];
+            jogador1[indicePecaEscolhida] = jogador1[numeroPecasDoJogador1 - 1];
+            numeroPecasDoJogador1--;
+        } else {
+            printf("nao pode\n");
+            return;
+        }
+    } else {
+        indicePecaEscolhida = escolha - 'a'; 
+        if (indicePecaEscolhida >= 0 && indicePecaEscolhida < numeroPecasDoJogador2) {
+            pecaEscolhida = jogador2[indicePecaEscolhida];
+            jogador2[indicePecaEscolhida] = jogador2[numeroPecasDoJogador2 - 1]; 
+            numeroPecasDoJogador2--;
+        } else {
+            printf("nao pode\n");
+            return;
+        }
+    }
+
+    // pode ou nao pode
+    if (mesa.posicaoLivreMesa > 0 && 
+        (pecaEscolhida.lado1 == mesa.pecasNaMesa[0].lado1 || pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1 || 
+         pecaEscolhida.lado1 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2 || pecaEscolhida.lado2 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2)) {
+        
+        if (pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1) {
+            inverterPeca(pecaEscolhida);
+        }
+        if (pecaEscolhida.lado1 == mesa.pecasNaMesa[0].lado1 || pecaEscolhida.lado2 == mesa.pecasNaMesa[0].lado1) {
+            // esquerda
+            for (int i = mesa.posicaoLivreMesa; i > 0; i--) {
+                mesa.pecasNaMesa[i] = mesa.pecasNaMesa[i - 1];
+            }
+            mesa.pecasNaMesa[0] = pecaEscolhida;
+            mesa.posicaoLivreMesa++;
+        } else if (pecaEscolhida.lado1 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2 || pecaEscolhida.lado2 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2) {
+            if (pecaEscolhida.lado1 == mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2) {
+                inverterPeca(pecaEscolhida);
+            }
+            //direita
+            mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida;
+            mesa.posicaoLivreMesa++;
+        } else {
+            printf("peca nao pode ser jogada!\n");
+            return;
+        }
+    } else if (mesa.posicaoLivreMesa == 0) {
+        //poe a peca na mesa se vtiver vazia
+        mesa.pecasNaMesa[0] = pecaEscolhida;
+        mesa.posicaoLivreMesa++;
+    } else {
+        printf("nao pode\n");
+        return;
+    }
+
+    apresentarMesa();
+
+    // muda vez
+    if (jvez == 'J') {
+        jvez = 'j';
+    } else {
+        jvez = 'J';
+    }
+
+    pepecasPecas(jvez);
 }
