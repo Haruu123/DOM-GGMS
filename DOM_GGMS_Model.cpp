@@ -10,7 +10,12 @@
 char jvez;
 Mesa mesa;
 tipopeca pecas[28];
-tipopeca j1[7], j2[7];
+tipopeca jogador1[7];
+tipopeca jogador2[7];
+tipopeca monte[14]; // monte de peças disp
+int numeroPecasNoMonte = 14;
+int numeroPecasDoJogador1 = 7;
+int numeroPecasDoJogador2 = 7;
 
 void fCriar(tipopeca pecas[]) {
     int k = 0;
@@ -24,12 +29,23 @@ void fCriar(tipopeca pecas[]) {
     }
 }
 
-void distribuiPecas(tipopeca pecas[]) {
+void distribuiPecas(tipopeca pecas[28]) {
     for (int i = 0; i < 7; i++) {
-        j1[i] = pecas[i];
-        j1[i].status = 'J';
-        j2[i] = pecas[i + 7];
-        j2[i].status = 'j';
+        jogador1[i] = pecas[i];
+        jogador1[i].status = 1; // status jogador 1
     }
+    for (int i = 7; i < 14; i++) {
+        jogador2[i - 7] = pecas[i];
+        jogador2[i - 7].status = 2; // status jogador 2
+    }
+    for (int i = 14; i < 28; i++) {
+        monte[i - 14] = pecas[i];
+        monte[i - 14].status = 0; // status monte
+    }
+    numeroPecasDoJogador1 = 7;
+    numeroPecasDoJogador2 = 7;
+    numeroPecasNoMonte = 14;
 }
+
+
 
