@@ -12,7 +12,7 @@ Mesa mesa;
 tipopeca pecas[28];
 tipopeca jogador1[7];
 tipopeca jogador2[7];
-tipopeca monte[14]; // monte de peças disp
+tipopeca monte[14]; // monte pecas disponiveis
 int numeroPecasNoMonte = 14;
 int numeroPecasDoJogador1 = 7;
 int numeroPecasDoJogador2 = 7;
@@ -30,6 +30,7 @@ void fCriar(tipopeca pecas[]) {
 }
 
 void distribuiPecas(tipopeca pecas[28]) {
+    
     for (int i = 0; i < 7; i++) {
         jogador1[i] = pecas[i];
         jogador1[i].status = 1; // status jogador 1
