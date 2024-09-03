@@ -20,9 +20,18 @@ void mensagemSair()
 	printf("Saindo do jogo.\n");
 }
 
-void jogadorJogou(char jvez)
+void jogadorJogou(char jvez) //Jogando Mudado na Versao TETEU
 {
-    printf("Jogador %c jogou\n", jvez);
+    if (jvez == 'j'){
+
+        printf("Jogador 2 jogou.\n\n");
+    }
+
+
+    if (jvez == 'J'){
+
+        printf("Jogador 1 jogou.\n\n");
+    }
 }
 
 void mensagemOpInvalida()
@@ -40,11 +49,15 @@ void pecasJ2()
 	printf("Pecas do jogador 2:\n");
 }
 
-void apresentarMesa(tipopeca peca) {
+void apresentarMesa() {
     printf("===========\n\n");
-	printf("MESA    [%d|%d]", peca.lado1, peca.lado2);
-	printf("\n\n==========\n");
+    printf("MESA: ");
+    for (int i = 0; i < mesa.posicaoLivreMesa; i++) {
+        printf("[%d|%d] ", mesa.pecasNaMesa[i].lado1, mesa.pecasNaMesa[i].lado2);
+    }
+    printf("\n\n==========\n");
 }
+
 
 void mensagemMonteVazio(){
     printf("Nao ha mais pecas no monte para comprar!");
