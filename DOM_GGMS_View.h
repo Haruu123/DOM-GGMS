@@ -10,7 +10,7 @@ void mensagemSair();
 void mensagemOpInvalida();
 void pecasJ1();
 void pecasJ2();
-void apresentarMesa(tipopeca pecaJogada);
+void apresentarMesa();
 int apresentarMenuGeral();
 void regrasGerais();
 int apresentarSubMenu();
