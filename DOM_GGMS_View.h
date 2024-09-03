@@ -10,6 +10,13 @@ void mensagemSair();
 void mensagemOpInvalida();
 void pecasJ1();
 void pecasJ2();
-void jogada1();
+void apresentarMesa(tipopeca pecaJogada);
 int apresentarMenuGeral();
+void regrasGerais();
+int apresentarSubMenu();
+void mensagemMonteVazio();
+void jogadorJogou(char jvez);
+
+
+
 
