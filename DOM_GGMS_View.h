@@ -18,5 +18,3 @@ void mensagemMonteVazio();
 void jogadorJogou(char jvez);
 
 
-
-
