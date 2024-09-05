@@ -1,5 +1,5 @@
-//DOM-GGMS-View.cpp - Projeto Dominó - Etapa 3
-//09/08/2024 - Grupo: GGMS
+//DOM-GGMS-View.cpp - Projeto Domino - Etapa 5
+//03/09/24 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
 //Matheus Gomes Costa Castanho Giacomini
@@ -69,8 +69,8 @@ int apresentarMenuGeral() {
 //    printf("2 - Iniciar jogo (contra o computador)\n");
 //    printf("3 - Retornar ao jogo interrompido\n");
     printf("2 - Regras gerais do Jogo\n");
-//    printf("5 - Salvar o jogo\n");
-//    printf("6 - Recuperar o jogo salvo\n");
+    printf("3 - Salvar o jogo\n");
+    printf("4 - Recuperar o jogo salvo\n");
     printf("0 - Sair do programa\n");
     printf("Opcao selecionada: ");
     scanf("%d", &op);
@@ -114,5 +114,7 @@ int apresentarSubMenu() {
 	scanf("%c", &op2);
 	return op2; 
 }
-	
 
+void apresentarMensagem(const char mens[100]){
+	printf("%s\n",mens);
+}
