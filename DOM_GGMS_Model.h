@@ -1,5 +1,5 @@
-//DOM-GGMS-Model.h - Projeto Dominó - Etapa 3
-//09/08/2024 - Grupo: GGMS
+//DOM-GGMS-Model.h - Projeto Domino - Etapa 5
+//03/09/24 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
 //Matheus Gomes Costa Castanho Giacomini
@@ -21,5 +21,4 @@ typedef struct {
 
 void fCriar(tipopeca pecas[28]);
 void distribuiPecas(tipopeca pecas[28]);
-
 
