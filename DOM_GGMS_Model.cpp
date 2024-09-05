@@ -1,5 +1,5 @@
-//DOM-GGMS-Model.cpp - Projeto Dominó - Etapa 3
-//09/08/2024 - Grupo: GGMS
+//DOM-GGMS-Model.cpp - Projeto Domino - Etapa 5
+//03/09/24 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
 //Matheus Gomes Costa Castanho Giacomini
@@ -48,5 +48,20 @@ void distribuiPecas(tipopeca pecas[28]) {
     numeroPecasNoMonte = 14;
 }
 
+struct Jogo {
+    int qtMesaJogo;      // Quantidade de peças na mesa
+    int jogadorJogo;     // Jogador atual (1 ou 2)
+    int jogadorComp;     // Se o jogador 2 é o computador (0: não, 2: sim)
+    int mesaDJogo;       // Extremidade direita da mesa
+    int mesaEJogo;       // Extremidade esquerda da mesa
+} sitJogo;               // Variável global da situação do jogo
 
+// Inicialize a estrutura Jogo com valores padrão
+void inicializaJogo() {
+    sitJogo.qtMesaJogo = 0;
+    sitJogo.jogadorJogo = 1;
+    sitJogo.jogadorComp = 0;  
+    sitJogo.mesaDJogo = -1;   
+    sitJogo.mesaEJogo = -1;   
+}
 
