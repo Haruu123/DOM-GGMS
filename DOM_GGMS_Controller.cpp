@@ -1,5 +1,5 @@
-//DOM-GGMS-Controller.cpp - Projeto Dominó - Etapa 3
-//09/08/2024 - Grupo: GGMS
+//DOM-GGMS-Controller.cpp - Projeto Domino - Etapa 5
+//03/09/24 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
 //Matheus Gomes Costa Castanho Giacomini
@@ -9,6 +9,7 @@
 #include "DOM_GGMS_View.cpp"
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
  
 void jogo(){
 	menuGeral();
@@ -59,7 +60,7 @@ void primeiroLance() {
         }
     }
  
-    // Se não tiver dupla, procurar a peca com a maior soma
+    // Se nÃ£o tiver dupla, procurar a peca com a maior soma
     if (pj == -1) {
         dupla = 0;
         for (i = 0; i < 7; i++) {
@@ -98,11 +99,12 @@ void primeiroLance() {
         jvez = 'J';
     }
  
-    indicePecas(jvez); // pecas de quem jogou
+    atualizaPecas(jvez); // pecas de quem jogou
     subMenu();
+    system("cls");
 }
  
-void indicePecas(char jvez) {
+void atualizaPecas(char jvez) {
     char indice = 'a'; // inicio ordem jogador1 
     if (jvez == 'J') {
         pecasJ1();
@@ -132,6 +134,7 @@ void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int
     } else {
         mensagemMonteVazio();
     }
+    system("cls");
     apresentarMesa(); // mostrar a mesa atualizada
 } 
  
@@ -150,6 +153,10 @@ void menuGeral() {
                 break;
             case 2:
             	regrasGerais();
+            case 3:
+            	gravaCadastro();
+            case 4:
+            	recuperaCadastro();
             default:
                 mensagemOpInvalida();
                 break;
@@ -176,16 +183,19 @@ void subMenu() {
                 } else {
                     fComprar(monte, numeroPecasNoMonte, jogador2, numeroPecasDoJogador2);
                 }
-                indicePecas(jvez);
+                atualizaPecas(jvez);
                 break;
             case 'p':
                 if (jvez == 'J') {
                     jvez = 'j'; // passa a vez para o jogador 2
+                    system("cls");
                 } else {
                     jvez = 'J'; // Passa a vez para o jogador 1
+                    system("cls");                 
                 }
-                printf("jogador passou a vez\n");
-                indicePecas(jvez); // atualiza as peças para o jogador que agora tem a vez
+                apresentarMensagem("Jogador passou a vez");
+                apresentarMesa();
+                atualizaPecas(jvez); // atualiza as peças para o jogador que agora tem a vez
                 break;
             case 's':
                 menuGeral();
@@ -203,9 +213,14 @@ void inverterPeca(tipopeca &peca) {
     peca.lado2 = temp;
 }
 
+#include <cstdio>  // Para sprintf
+
 void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
     int mesaE, mesaD;
-	int jogadaValida = 0;
+    int JogadaValida1 = 0;
+    int JogadaValida2 = 0;
+    char buffer[50]; // Buffer para armazenar as mensagens formatadas
+
     if (mesa.posicaoLivreMesa > 0) {
         mesaE = mesa.pecasNaMesa[0].lado1;
         mesaD = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
@@ -214,42 +229,43 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
     }
 
     if (jvez == 'J') {
-        printf("pecas possiveis do Jogador 1:\n");
+        apresentarMensagem("Pecas possiveis do Jogador 1:");
         for (int i = 0; i < numeroPecasDoJogador1; i++) {
             if (jogador1[i].lado1 == mesaE || jogador1[i].lado2 == mesaE || jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
-                printf(" [%d|%d] ", jogador1[i].lado1, jogador1[i].lado2);
-                jogadaValida = 1;
+                // Usar sprintf para formatar a mensagem
+                sprintf(buffer, "[%d|%d]", jogador1[i].lado1, jogador1[i].lado2);
+                apresentarMensagem(buffer); // Exibir a mensagem formatada
+                JogadaValida1 = 1;
             }
         }
-        if (!jogadaValida) {
-            printf("Nao possui pecas jogaveis, compre pecas.\n");
+        if (JogadaValida1 == 0) {
+            apresentarMensagem("Nao possui pecas jogaveis, compre pecas.");
             subMenu();
         }
-        printf("\n");
     } else {
-        printf("pecas possiveis do Jogador 2:\n");
-        jogadaValida = 0;
+        apresentarMensagem("Pecas possiveis do Jogador 2:");
         for (int i = 0; i < numeroPecasDoJogador2; i++) {
             if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
-                printf(" [%d|%d] ", jogador2[i].lado1, jogador2[i].lado2);
-    			jogadaValida = 1;
+                // Usar sprintf para formatar a mensagem
+                sprintf(buffer, "[%d|%d]", jogador2[i].lado1, jogador2[i].lado2);
+                apresentarMensagem(buffer); // Exibir a mensagem formatada
+                JogadaValida2 = 1;
             }
-        }if (!jogadaValida) {
-            printf("Nao possui pecas jogaveis, compre pecas.\n");
+        }
+        if (JogadaValida2 == 0) {
+            apresentarMensagem("Jogador 2 nao possui pecas jogaveis, compre pecas.");
             subMenu();
         }
-        
-        }
-        printf("\n");
     }
+}
 
 void vencedor() {
     if (numeroPecasDoJogador1 == 0) {
-        printf("FIM : jogador 1 venceu\n");
-        exit(0); 
+        apresentarMensagem("FIM: jogador 1 venceu");
+        exit(0);
     } else if (numeroPecasDoJogador2 == 0) {
-        printf("FIM : jogador 2 venceu \n");
-        exit(0); 
+        apresentarMensagem("FIM: jogador 2 venceu");
+        exit(0);
     }
 }
 
@@ -260,7 +276,6 @@ void podeJogarOuNao() {
     int ladoMesaEsquerda = mesa.pecasNaMesa[0].lado1;
     int ladoMesaDireita = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
 
-     
     for (int i = 0; i < numeroPecasDoJogador1; i++) {
         if (jogador1[i].lado1 == ladoMesaEsquerda || jogador1[i].lado2 == ladoMesaEsquerda ||
             jogador1[i].lado1 == ladoMesaDireita || jogador1[i].lado2 == ladoMesaDireita) {
@@ -268,7 +283,6 @@ void podeJogarOuNao() {
             break;
         }
     }
-
 
     for (int i = 0; i < numeroPecasDoJogador2; i++) {
         if (jogador2[i].lado1 == ladoMesaEsquerda || jogador2[i].lado2 == ladoMesaEsquerda ||
@@ -278,16 +292,15 @@ void podeJogarOuNao() {
         }
     }
 
-    
     if (podeJogarJogador1 == 0 && podeJogarJogador2 == 0 && numeroPecasNoMonte == 0) {
         if (numeroPecasDoJogador1 < numeroPecasDoJogador2) {
-            printf("nenhum jogador pode jogar. jogador 1 venceu com menos peças\n");
+            apresentarMensagem("Nenhum jogador pode jogar. Jogador 1 venceu com menos pecas.");
         } else if (numeroPecasDoJogador2 < numeroPecasDoJogador1) {
-            printf("nenhum jogador pode jogar. jogador 2 venceu com menos peças\n");
+            apresentarMensagem("Nenhum jogador pode jogar. Jogador 2 venceu com menos pecas.");
         } else {
-            printf("nenhum jogador pode jogar. o jogo terminou empatado\n");
+            apresentarMensagem("Nenhum jogador pode jogar. O jogo terminou empatado.");
         }
-        exit(0); 
+        exit(0);
     }
 }
 
@@ -298,7 +311,7 @@ void jogada() {
 
     mostrarPecasPossiveis(jogador1, jogador2, jvez);
 
-    printf("escolha a peca (digite a letra): ");
+    apresentarMensagem("Escolha a peca (digite a letra): ");
     scanf(" %c", &escolha);
 
     if (jvez == 'J') {
@@ -308,7 +321,7 @@ void jogada() {
             jogador1[indicePecaEscolhida] = jogador1[numeroPecasDoJogador1 - 1];
             numeroPecasDoJogador1--;
         } else {
-            printf("nao pode\n");
+            apresentarMensagem("Nao pode.");
             return;
         }
     } else {
@@ -318,21 +331,20 @@ void jogada() {
             jogador2[indicePecaEscolhida] = jogador2[numeroPecasDoJogador2 - 1];
             numeroPecasDoJogador2--;
         } else {
-            printf("nao pode\n");
+            apresentarMensagem("Nao pode.");
             return;
         }
     }
 
-
     int ladoMesaEsquerda = mesa.pecasNaMesa[0].lado1;
     int ladoMesaDireita = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
 
-    // onde a peça será colocada
+    // Onde a peça será colocada
     if ((pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) && 
         (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita)) {
-        // a peça pode ser jogada em ambos os lados
+        // A peça pode ser jogada em ambos os lados
         char ladoEscolhido;
-        printf("'e' para esquerda ou 'd' para direita: ");
+        apresentarMensagem("'e' para esquerda ou 'd' para direita: ");
         limparBuffer();
         scanf(" %c", &ladoEscolhido);
 
@@ -340,7 +352,7 @@ void jogada() {
             if (pecaEscolhida.lado1 == ladoMesaEsquerda) {
                 inverterPeca(pecaEscolhida);
             }
-            
+
             for (int i = mesa.posicaoLivreMesa; i > 0; i--) {
                 mesa.pecasNaMesa[i] = mesa.pecasNaMesa[i - 1];
             }
@@ -350,18 +362,18 @@ void jogada() {
             if (pecaEscolhida.lado2 == ladoMesaDireita) {
                 inverterPeca(pecaEscolhida);
             }
-           
+
             mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida;
             mesa.posicaoLivreMesa++;
         } else {
-            printf("nao pode\n");
+            apresentarMensagem("Nao pode.");
             return;
         }
     } else if (pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) {
         if (pecaEscolhida.lado1 == ladoMesaEsquerda) {
             inverterPeca(pecaEscolhida);
         }
-        
+
         for (int i = mesa.posicaoLivreMesa; i > 0; i--) {
             mesa.pecasNaMesa[i] = mesa.pecasNaMesa[i - 1];
         }
@@ -371,38 +383,98 @@ void jogada() {
         if (pecaEscolhida.lado2 == ladoMesaDireita) {
             inverterPeca(pecaEscolhida);
         }
-        
+
         mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida;
         mesa.posicaoLivreMesa++;
     } else {
-        printf("nao pode\n");
+        apresentarMensagem("Nao pode.");
         return;
     }
-
+    
+    system("cls");
     apresentarMesa();
 
     vencedor();
-
     podeJogarOuNao();
 
-    // troca vez
+    // Troca vez
     if (jvez == 'J') {
         jvez = 'j';
     } else {
         jvez = 'J';
     }
 
-    indicePecas(jvez);
+    atualizaPecas(jvez);
 }
 
+void gravaCadastro() {
+    FILE *fp, *fpm, *fps;
 
+    // Abrindo os arquivos para gravação
+    fp = fopen("CAD_DOMINO.dat", "wb");
+    fpm = fopen("CAD_MESA.dat", "wb");
+    fps = fopen("CAD_JOGO.dat", "wb");
 
+    if (fp == NULL || fpm == NULL || fps == NULL) {
+        printf("Erro ao abrir arquivos para gravacao.\n");
+        return;
+    }
 
+    // Gravar todas as 28 peças no arquivo CAD_DOMINO
+    fwrite(pecas, sizeof(tipopeca), 28, fp);
 
+    // Gravar as peças da mesa no arquivo CAD_MESA
+    fwrite(mesa.pecasNaMesa, sizeof(tipopeca), mesa.posicaoLivreMesa, fpm);
 
+    // Atualizar a estrutura sitJogo com as variáveis globais
+    sitJogo.qtMesaJogo = mesa.posicaoLivreMesa;
+    sitJogo.mesaDJogo = mesa.mesaD;
+    sitJogo.mesaEJogo = mesa.mesaE;
+    sitJogo.jogadorJogo = (jvez == 'J') ? 1 : 2;
 
+    // Gravar a estrutura sitJogo no arquivo CAD_JOGO
+    fwrite(&sitJogo, sizeof(Jogo), 1, fps);
 
+    // Fechar os arquivos
+    fclose(fp);
+    fclose(fpm);
+    fclose(fps);
 
+    apresentarMensagem("Cadastro gravado com sucesso!\n");
+}
 
+void recuperaCadastro() {
+    FILE *fp, *fpm, *fps;
 
+    // Abrindo os arquivos para leitura
+    fp = fopen("CAD_DOMINO.dat", "rb");
+    fpm = fopen("CAD_MESA.dat", "rb");
+    fps = fopen("CAD_JOGO.dat", "rb");
 
+    if (fp == NULL || fpm == NULL || fps == NULL) {
+        printf("Erro ao abrir arquivos para leitura.\n");
+        return;
+    }
+
+    // Recuperar todas as 28 peças do arquivo CAD_DOMINO
+    fread(pecas, sizeof(tipopeca), 28, fp);
+
+    // Recuperar as peças da mesa do arquivo CAD_MESA
+    fread(mesa.pecasNaMesa, sizeof(tipopeca), mesa.posicaoLivreMesa, fpm);
+
+    // Recuperar a estrutura sitJogo do arquivo CAD_JOGO
+    fread(&sitJogo, sizeof(Jogo), 1, fps);
+
+    // Atualizar as variáveis globais com os dados recuperados
+    mesa.posicaoLivreMesa = sitJogo.qtMesaJogo;
+    mesa.mesaD = sitJogo.mesaDJogo;
+    mesa.mesaE = sitJogo.mesaEJogo;
+    jvez = (sitJogo.jogadorJogo == 1) ? 'J' : 'j';
+
+    // Fechar os arquivos
+    fclose(fp);
+    fclose(fpm);
+    fclose(fps);
+
+    apresentarMensagem("Cadastro recuperado com sucesso!\n");
+}
