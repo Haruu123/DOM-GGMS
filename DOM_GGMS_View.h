@@ -1,5 +1,5 @@
-//DOM-GGMS-View.h - Projeto Dominó - Etapa 3
-//09/08/2024 - Grupo: GGMS
+//DOM-GGMS-View.h - Projeto Domino - Etapa 5
+//03/09/24 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
 //Matheus Gomes Costa Castanho Giacomini
@@ -16,5 +16,6 @@ void regrasGerais();
 int apresentarSubMenu();
 void mensagemMonteVazio();
 void jogadorJogou(char jvez);
+void apresentarMensagem(const char mens[100]);
 
 
