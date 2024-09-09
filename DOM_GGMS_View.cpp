@@ -20,34 +20,12 @@ void mensagemSair()
 	printf("Saindo do jogo.\n");
 }
 
-void jogadorJogou(char jvez) //Jogando Mudado na Versao TETEU
-{
-    if (jvez == 'j'){
-
-        printf("Jogador 2 jogou.\n\n");
-    }
-
-
-    if (jvez == 'J'){
-
-        printf("Jogador 1 jogou.\n\n");
-    }
-}
 
 void mensagemOpInvalida()
 {
 	printf("Opcao invalida. Tente novamente.\n\n");
 }
 
-void pecasJ1()
-{
-	printf("\nPecas do jogador 1:\n");
-}
-
-void pecasJ2()
-{
-	printf("Pecas do jogador 2:\n");
-}
 
 void apresentarMesa() {
     printf("===========\n\n");
@@ -117,4 +95,19 @@ int apresentarSubMenu() {
 
 void apresentarMensagem(const char mens[100]){
 	printf("%s\n",mens);
+}
+
+void escanearLadoEscolhido()
+{
+	scanf(" %c", &ladoEscolhido);
+}
+
+void escanearEscolha()
+{
+	scanf(" %c", &escolha);
+}
+
+void apresentarPeca(char indice, int lado1, int lado2)
+{
+	printf("%c. [%d|%d] ", indice, lado1, lado2);
 }
