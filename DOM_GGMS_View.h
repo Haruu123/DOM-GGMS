@@ -8,14 +8,14 @@
 void fMostra(tipopeca pecas[28]);
 void mensagemSair();
 void mensagemOpInvalida();
-void pecasJ1();
-void pecasJ2();
 void apresentarMesa();
 int apresentarMenuGeral();
 void regrasGerais();
 int apresentarSubMenu();
 void mensagemMonteVazio();
-void jogadorJogou(char jvez);
 void apresentarMensagem(const char mens[100]);
+void apresentarPeca(char indice, int lado1, int lado2);
+void escanearLadoEscolhido();
+void escanearEscolha();
 
 
