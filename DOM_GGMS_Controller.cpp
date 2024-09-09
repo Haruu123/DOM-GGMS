@@ -33,12 +33,12 @@ void iniciarJogo() {
 }
  
 void colocarPecaNaMesa(tipopeca peca) {
-	mesa.posicaoLivreMesa = 0; //pos 0 da array
-    if (mesa.posicaoLivreMesa < 28) {
-        mesa.pecasNaMesa[mesa.posicaoLivreMesa] = peca; //peca vai pra posicao do contador
-        mesa.posicaoLivreMesa++; //incremento = avanca o slot da mesa
+    if (mesa.posicaoLivreMesa < 28) { //A mesa so pode ter 28 pecas, entao mesa.posicaoLivreMesa avalia se ha espaco para novas pecas
+        mesa.pecasNaMesa[mesa.posicaoLivreMesa] = peca; //pecasNaMesa e' uma array de 28 slots (pecas). Se houver espaco, 'peca' e' adicionada a posicao de mesa.posicaoLivreMesa
+        mesa.posicaoLivreMesa++; //Depois de alocar espaco para uma peca, mesa.posicaoLivreMesa e' incrementada para disponibilizar uma proxima posicao 
     }
 }
+//Exclusao da inicializacao em 0 de mesa.posicaoLivreMesa = como sempre inicializava em 0, impedia a adicao de novas pecas a mesa
  
 void primeiroLance() {
     int i, pj, dupla;
@@ -46,7 +46,10 @@ void primeiroLance() {
     dupla = -1;
     tipopeca pecaJogada;
  
-    // Procurar a maior dupla
+    // Procurar a maior dupla:
+/* Se os lados da peca escolhida forem iguais, pj recebe o indice da peca e dupla, seu valor. A comparacao com -1 e' realizada para determinar se a dupla
+existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a maior soma disponivel.
+*/
     for (i = 0; i < 7; i++) {
         if (jogador1[i].lado1 == jogador1[i].lado2 && jogador1[i].lado1 > dupla) {
             dupla = jogador1[i].lado1;
@@ -60,7 +63,7 @@ void primeiroLance() {
         }
     }
  
-    // Se nÃ£o tiver dupla, procurar a peca com a maior soma
+    // Se nao tiver dupla, procurar a peca com a maior soma
     if (pj == -1) {
         dupla = 0;
         for (i = 0; i < 7; i++) {
@@ -77,6 +80,8 @@ void primeiroLance() {
         }
     }
  
+ /* Se jvez = 'J', pecaJogada (tipopeca) torna-se a peca de maior dupla/soma, e o numero de pecas do jogador 1 reduz em uma unidade. E vice-versa.
+ */
     if (jvez == 'J') {
         pecaJogada = jogador1[pj];
         jogador1[pj] = jogador1[numeroPecasDoJogador1 - 1]; // -1 peca do jogador
@@ -90,12 +95,12 @@ void primeiroLance() {
     colocarPecaNaMesa(pecaJogada);
     apresentarMesa();
  
-    //troca vez de jogar
+    //Necessario para alternar as vezes dos jogadores.
     if (jvez == 'J') {
-    	jogadorJogou(jvez); //se for 'j' eh o jogador 2, se for 'J' eh o jogador 1 (arrumar para 1 e 2)
+    	apresentarMensagem("Jogador 1 jogou.\n");
         jvez = 'j';
     } else {
-    	jogadorJogou(jvez);
+    	apresentarMensagem("Jogador 2 jogou.\n");
         jvez = 'J';
     }
  
@@ -105,22 +110,23 @@ void primeiroLance() {
 }
  
 void atualizaPecas(char jvez) {
-    char indice = 'a'; // inicio ordem jogador1 
+    char indice; 
     if (jvez == 'J') {
-        pecasJ1();
+    	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 1
+        apresentarMensagem("\nPecas do jogador 1:\n");
         for (int i = 0; i < numeroPecasDoJogador1; i++) { // pecas do jogador 1
-            printf("%c. [%d|%d] ", indice, jogador1[i].lado1, jogador1[i].lado2);
+            apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
             indice++;
         }
-        printf("\n");
+        apresentarMensagem("\n");
     } else {
-        pecasJ2();
-        indice = 'a'; // inicio ordem jogador2
+    	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 2
+        apresentarMensagem("\nPecas do jogador 2:\n");
         for (int i = 0; i < numeroPecasDoJogador2; i++) { // pecas do jogador 2
-            printf("%c. [%d|%d] ", indice, jogador2[i].lado1, jogador2[i].lado2);
+            apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
             indice++;
         }
-        printf("\n");
+        apresentarMensagem("\n");
     }
 }
  
@@ -213,13 +219,10 @@ void inverterPeca(tipopeca &peca) {
     peca.lado2 = temp;
 }
 
-#include <cstdio>  // Para sprintf
-
 void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
     int mesaE, mesaD;
-    int JogadaValida1 = 0;
-    int JogadaValida2 = 0;
-    char buffer[50]; // Buffer para armazenar as mensagens formatadas
+    int jogadaValida = 0; //nenhuma peça jogavel encontrada ainda
+    char indice;
 
     if (mesa.posicaoLivreMesa > 0) {
         mesaE = mesa.pecasNaMesa[0].lado1;
@@ -229,34 +232,39 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
     }
 
     if (jvez == 'J') {
-        apresentarMensagem("Pecas possiveis do Jogador 1:");
+        indice = 'a';
         for (int i = 0; i < numeroPecasDoJogador1; i++) {
-            if (jogador1[i].lado1 == mesaE || jogador1[i].lado2 == mesaE || jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
-                // Usar sprintf para formatar a mensagem
-                sprintf(buffer, "[%d|%d]", jogador1[i].lado1, jogador1[i].lado2);
-                apresentarMensagem(buffer); // Exibir a mensagem formatada
-                JogadaValida1 = 1;
+            if (jogador1[i].lado1 == mesaE || jogador1[i].lado2 == mesaE || 
+                jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
+                if (!jogadaValida) //Se uma peça valida for encontrada, if (!jogadaValida) é verdadeiro pois !0 = 1 (verdadeiro)
+				{
+                    apresentarMensagem("Pecas possiveis do Jogador 1:");
+                }
+                apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
+                jogadaValida = 1;
             }
-        }
-        if (JogadaValida1 == 0) {
-            apresentarMensagem("Nao possui pecas jogaveis, compre pecas.");
-            subMenu();
+            indice++;
         }
     } else {
-        apresentarMensagem("Pecas possiveis do Jogador 2:");
+        indice = 'a';
         for (int i = 0; i < numeroPecasDoJogador2; i++) {
-            if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
-                // Usar sprintf para formatar a mensagem
-                sprintf(buffer, "[%d|%d]", jogador2[i].lado1, jogador2[i].lado2);
-                apresentarMensagem(buffer); // Exibir a mensagem formatada
-                JogadaValida2 = 1;
+            if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || 
+                jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
+                if (!jogadaValida) {
+                    apresentarMensagem("Pecas possiveis do Jogador 2:");
+                }
+                apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
+                jogadaValida = 1;
             }
+            indice++;
         }
-        if (JogadaValida2 == 0) {
-            apresentarMensagem("Jogador 2 nao possui pecas jogaveis, compre pecas.");
-            subMenu();
-        }
+    } 
+    
+    if (!jogadaValida) {
+        apresentarMensagem("Nao possui pecas jogaveis, compre pecas.");
+        subMenu();
     }
+    apresentarMensagem("\n");
 }
 
 void vencedor() {
@@ -307,19 +315,20 @@ void podeJogarOuNao() {
 void jogada() {
     tipopeca pecaEscolhida;
     int indicePecaEscolhida;
-    char escolha;
+
 
     mostrarPecasPossiveis(jogador1, jogador2, jvez);
 
     apresentarMensagem("Escolha a peca (digite a letra): ");
-    scanf(" %c", &escolha);
+    escanearEscolha();
+    
 
     if (jvez == 'J') {
-        indicePecaEscolhida = escolha - 'a';
-        if (indicePecaEscolhida >= 0 && indicePecaEscolhida < numeroPecasDoJogador1) {
+        indicePecaEscolhida = escolha - 'a'; //Conceito da tabela ASCII 
+        if (indicePecaEscolhida >= 0 && indicePecaEscolhida < numeroPecasDoJogador1) { //Checa se o indice e' valido
             pecaEscolhida = jogador1[indicePecaEscolhida];
-            jogador1[indicePecaEscolhida] = jogador1[numeroPecasDoJogador1 - 1];
-            numeroPecasDoJogador1--;
+            jogador1[indicePecaEscolhida] = jogador1[numeroPecasDoJogador1 - 1]; //Remove a peca escolhida do leque, substituindo-a pela última peça
+            numeroPecasDoJogador1--; //Reduz uma peca do leque do jogador 1
         } else {
             apresentarMensagem("Nao pode.");
             return;
@@ -336,40 +345,40 @@ void jogada() {
         }
     }
 
-    int ladoMesaEsquerda = mesa.pecasNaMesa[0].lado1;
-    int ladoMesaDireita = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
+    int ladoMesaEsquerda = mesa.pecasNaMesa[0].lado1; //Lado esquerdo da primeira peca da mesa
+    int ladoMesaDireita = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2; //Lado direito da ultima peca da mesa
 
-    // Onde a peça será colocada
     if ((pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) && 
         (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita)) {
-        // A peça pode ser jogada em ambos os lados
-        char ladoEscolhido;
+   /*Verifica se a peca escolhida pode ser jogada tanto no lado esquerdo quanto no lado direito da mesa. 
+	Se for o caso, o jogador pode escolher em qual lado jogar.*/
         apresentarMensagem("'e' para esquerda ou 'd' para direita: ");
         limparBuffer();
-        scanf(" %c", &ladoEscolhido);
+        escanearLadoEscolhido();
 
         if (ladoEscolhido == 'e') {
-            if (pecaEscolhida.lado1 == ladoMesaEsquerda) {
+            if (pecaEscolhida.lado1 == ladoMesaEsquerda) { //Verifica se sera necessario inverter a peca devido a nao compatibilidade numerica das pecas
                 inverterPeca(pecaEscolhida);
             }
 
-            for (int i = mesa.posicaoLivreMesa; i > 0; i--) {
+            for (int i = mesa.posicaoLivreMesa; i > 0; i--) { //Se for necessario inverter, as pecas sao deslocadas para a direita
                 mesa.pecasNaMesa[i] = mesa.pecasNaMesa[i - 1];
             }
             mesa.pecasNaMesa[0] = pecaEscolhida;
             mesa.posicaoLivreMesa++;
+            
         } else if (ladoEscolhido == 'd') {
-            if (pecaEscolhida.lado2 == ladoMesaDireita) {
+            if (pecaEscolhida.lado2 == ladoMesaDireita) { 
                 inverterPeca(pecaEscolhida);
             }
 
-            mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida;
+            mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida; //Se for necessario inverter a peca, sera adicionada a direita, sem mover as outras pecas
             mesa.posicaoLivreMesa++;
         } else {
             apresentarMensagem("Nao pode.");
             return;
         }
-    } else if (pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) {
+    } else if (pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) { //Somente podera ser jogada na esquerda
         if (pecaEscolhida.lado1 == ladoMesaEsquerda) {
             inverterPeca(pecaEscolhida);
         }
@@ -379,7 +388,7 @@ void jogada() {
         }
         mesa.pecasNaMesa[0] = pecaEscolhida;
         mesa.posicaoLivreMesa++;
-    } else if (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita) {
+    } else if (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita) { //Somente podera ser jogada na direita 
         if (pecaEscolhida.lado2 == ladoMesaDireita) {
             inverterPeca(pecaEscolhida);
         }
@@ -478,3 +487,6 @@ void recuperaCadastro() {
 
     apresentarMensagem("Cadastro recuperado com sucesso!\n");
 }
+
+
+
