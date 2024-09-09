@@ -159,10 +159,13 @@ void menuGeral() {
                 break;
             case 2:
             	regrasGerais();
+		break;
             case 3:
             	gravaCadastro();
+		break;
             case 4:
             	recuperaCadastro();
+		break;
             default:
                 mensagemOpInvalida();
                 break;
