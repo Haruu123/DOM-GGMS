@@ -154,18 +154,16 @@ void menuGeral() {
 				exit(0);
 			case 1:
                 iniciarJogo();
-                system("pause");
                 system("cls");
                 break;
             case 2:
             	regrasGerais();
-		break;
             case 3:
             	gravaCadastro();
-		break;
+            	break;
             case 4:
             	recuperaCadastro();
-		break;
+            	break;
             default:
                 mensagemOpInvalida();
                 break;
