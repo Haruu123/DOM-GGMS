@@ -8,6 +8,8 @@
 #include "DOM_GGMS_Model.h"
 
 char jvez;
+char escolha;
+char ladoEscolhido;
 Mesa mesa;
 tipopeca pecas[28];
 tipopeca jogador1[7];
