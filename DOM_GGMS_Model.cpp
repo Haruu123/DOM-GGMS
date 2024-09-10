@@ -66,4 +66,3 @@ void inicializaJogo() {
     sitJogo.mesaDJogo = -1;   
     sitJogo.mesaEJogo = -1;   
 }
-
