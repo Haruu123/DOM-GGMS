@@ -154,7 +154,6 @@ void menuGeral() {
 				exit(0);
 			case 1:
                 iniciarJogo();
-                system("cls");
                 break;
             case 2:
             	regrasGerais();
