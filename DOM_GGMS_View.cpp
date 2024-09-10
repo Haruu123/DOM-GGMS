@@ -89,7 +89,7 @@ int apresentarSubMenu() {
 	printf(" c - comprar pecas\n");
 	printf(" p - passar a vez\n");
 	printf(" s - sair (interromper o jogo)\n");
-	printf("\tOpcao selecionada: \n");
+	printf("Opcao selecionada: \n");
 	limparBuffer();
 	scanf("%c", &op2);
 	return op2; 
