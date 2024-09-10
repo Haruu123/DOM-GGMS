@@ -159,8 +159,13 @@ void menuGeral() {
             case 2:
             	regrasGerais();
             case 3:
-            	gravaCadastro();
-            	break;
+            	if (mesa.posicaoLivreMesa == 0) {
+                    apresentarMensagem("\nNao ha nenhum jogo disponivel para salvar.\n");
+                    menuGeral();
+                } else {
+                    gravaCadastro();
+                }
+                break;
             case 4:
             	recuperaCadastro();
             	break;
