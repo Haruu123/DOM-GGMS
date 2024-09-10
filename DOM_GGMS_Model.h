@@ -22,4 +22,3 @@ typedef struct {
 void fCriar(tipopeca pecas[28]);
 void distribuiPecas(tipopeca pecas[28]);
 
-
