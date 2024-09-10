@@ -430,19 +430,27 @@ void gravaCadastro() {
         return;
     }
 
-    // Gravar todas as 28 peças no arquivo CAD_DOMINO
+    // Todas as 28 pecas sao armazenadas no arquivo CAD_DOMINO 
     fwrite(pecas, sizeof(tipopeca), 28, fp);
 
-    // Gravar as peças da mesa no arquivo CAD_MESA
+    // Todas as pecas da mesa sao armazenadas no arquivo CAD_MESA
     fwrite(mesa.pecasNaMesa, sizeof(tipopeca), mesa.posicaoLivreMesa, fpm);
 
-    // Atualizar a estrutura sitJogo com as variáveis globais
+    //A posicao livre da mesa e' gravada no arquivo CAD_MESA
+    fwrite(&mesa.posicaoLivreMesa, sizeof(int), 1, fpm);
+
+    // Atualiza a estrutura sit.Jogo com outras variaveis para indicar o estado atual da partida
     sitJogo.qtMesaJogo = mesa.posicaoLivreMesa;
     sitJogo.mesaDJogo = mesa.mesaD;
     sitJogo.mesaEJogo = mesa.mesaE;
-    sitJogo.jogadorJogo = (jvez == 'J') ? 1 : 2;
+    
+    if (sitJogo.jogadorJogo == 1) {
+    	jvez = 'J';	
+	} else {
+    	jvez = 'j';
+	}
 
-    // Gravar a estrutura sitJogo no arquivo CAD_JOGO
+    // A estrutura sitJogo e' armazenada no arquivo CAD_JOGO
     fwrite(&sitJogo, sizeof(Jogo), 1, fps);
 
     // Fechar os arquivos
@@ -453,10 +461,11 @@ void gravaCadastro() {
     apresentarMensagem("Cadastro gravado com sucesso!\n");
 }
 
+
 void recuperaCadastro() {
     FILE *fp, *fpm, *fps;
 
-    // Abrindo os arquivos para leitura
+    // Abrir os arquivos para leitura
     fp = fopen("CAD_DOMINO.dat", "rb");
     fpm = fopen("CAD_MESA.dat", "rb");
     fps = fopen("CAD_JOGO.dat", "rb");
@@ -466,28 +475,38 @@ void recuperaCadastro() {
         return;
     }
 
-    // Recuperar todas as 28 peças do arquivo CAD_DOMINO
-    fread(pecas, sizeof(tipopeca), 28, fp);
+    fread(pecas, sizeof(tipopeca), 28, fp); 
 
-    // Recuperar as peças da mesa do arquivo CAD_MESA
-    fread(mesa.pecasNaMesa, sizeof(tipopeca), mesa.posicaoLivreMesa, fpm);
+    fread(mesa.pecasNaMesa, sizeof(tipopeca), 28, fpm); /*fread le do arquivo fpm um total de 28 pecas, 
+    cada um com o tamanho de sizeof(tipopeca), e armazena essas pecas na memória
+	comecando no endereço mesa.pecasNaMesa*/
+	
+    fread(&mesa.posicaoLivreMesa, sizeof(int), 1, fpm);
+	/* &mesa.posicaoLivreMesa e' o ponteiro para a variavel mesa.posicaoLivreMesa.
+	fread le do arquivo fpm um total de 1 peca, com o tamanho de sizeof(int),
+	e armazena esse elemento na memoria no endereco &mesa.posicaoLivreMesa */
 
-    // Recuperar a estrutura sitJogo do arquivo CAD_JOGO
+
     fread(&sitJogo, sizeof(Jogo), 1, fps);
 
-    // Atualizar as variáveis globais com os dados recuperados
-    mesa.posicaoLivreMesa = sitJogo.qtMesaJogo;
-    mesa.mesaD = sitJogo.mesaDJogo;
-    mesa.mesaE = sitJogo.mesaEJogo;
-    jvez = (sitJogo.jogadorJogo == 1) ? 'J' : 'j';
-
-    // Fechar os arquivos
+  
     fclose(fp);
     fclose(fpm);
     fclose(fps);
 
+    mesa.mesaD = sitJogo.mesaDJogo; //Atualiza o estado atual do jogo
+    mesa.mesaE = sitJogo.mesaEJogo;
+
+	if (sitJogo.jogadorJogo == 1) {
+    	jvez = 'J';	
+	} else {
+    	jvez = 'j';
+	}
+
+    // Atualiza a apresentacao da mesa e das pecas dos jogadores
     apresentarMensagem("Cadastro recuperado com sucesso!\n");
+    apresentarMesa();
+    atualizaPecas(jvez);
+    subMenu();
 }
-
-
 
