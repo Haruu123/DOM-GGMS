@@ -97,10 +97,10 @@ existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a m
  
     //Necessario para alternar as vezes dos jogadores.
     if (jvez == 'J') {
-    	apresentarMensagem("Jogador 1 jogou.\n");
+    	apresentarMensagem("-> Jogador 1 jogou, Vez do Jogador 2! \n");
         jvez = 'j';
     } else {
-    	apresentarMensagem("Jogador 2 jogou.\n");
+    	apresentarMensagem("-> Jogador 2 jogou, Vez do Jogador 1! \n");
         jvez = 'J';
     }
  
@@ -113,7 +113,7 @@ void atualizaPecas(char jvez) {
     char indice; 
     if (jvez == 'J') {
     	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 1
-        apresentarMensagem("\nPecas do jogador 1:\n");
+        apresentarMensagem("\n -> Pecas do jogador 1:\n\n");
         for (int i = 0; i < numeroPecasDoJogador1; i++) { // pecas do jogador 1
             apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
             indice++;
@@ -121,7 +121,7 @@ void atualizaPecas(char jvez) {
         apresentarMensagem("\n");
     } else {
     	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 2
-        apresentarMensagem("\nPecas do jogador 2:\n");
+        apresentarMensagem("\n -> Pecas do jogador 2:\n\n");
         for (int i = 0; i < numeroPecasDoJogador2; i++) { // pecas do jogador 2
             apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
             indice++;
@@ -141,6 +141,7 @@ void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int
         mensagemMonteVazio();
     }
     system("cls");
+    printf("-> Compra efetuada! \n");
     apresentarMesa(); // mostrar a mesa atualizada
 } 
  
@@ -160,7 +161,7 @@ void menuGeral() {
             	break;
             case 3:
             	if (mesa.posicaoLivreMesa == 0) {
-                    apresentarMensagem("\nNenhum jogo esta disponivel para salvar.\n");
+                    apresentarMensagem("\n-> Nenhum jogo esta disponivel para salvar.\n");
                     menuGeral();
                 } else {
                     gravaCadastro();
@@ -204,7 +205,7 @@ void subMenu() {
                     jvez = 'J'; // Passa a vez para o jogador 1
                     system("cls");                 
                 }
-                apresentarMensagem("Jogador passou a vez");
+                apresentarMensagem("-> Jogador passou a vez. ");
                 apresentarMesa();
                 atualizaPecas(jvez); // atualiza as peças para o jogador que agora tem a vez
                 break;
@@ -243,7 +244,7 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
                 jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
                 if (!jogadaValida) //Se uma peça valida for encontrada, if (!jogadaValida) é verdadeiro pois !0 = 1 (verdadeiro)
 				{
-                    apresentarMensagem("Pecas possiveis do Jogador 1:");
+                    apresentarMensagem("\n -> Pecas Possiveis do Jogador 1: \n");
                 }
                 apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
                 jogadaValida = 1;
@@ -256,7 +257,7 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
             if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || 
                 jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
                 if (!jogadaValida) {
-                    apresentarMensagem("Pecas possiveis do Jogador 2:");
+                    apresentarMensagem("\n -> Pecas Possiveis do Jogador 2: \n");
                 }
                 apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
                 jogadaValida = 1;
@@ -266,7 +267,7 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
     } 
     
     if (!jogadaValida) {
-        apresentarMensagem("Nao possui pecas jogaveis, compre pecas.");
+        apresentarMensagem("\n -> Nao possui Pecas Jogaveis, compre pecas.\n");
         subMenu();
     }
     apresentarMensagem("\n");
@@ -274,10 +275,10 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
 
 void vencedor() {
     if (numeroPecasDoJogador1 == 0) {
-        apresentarMensagem("FIM: jogador 1 venceu");
+        apresentarMensagem("---> FIM: Jogador 1 Venceu! ;D ");
         exit(0);
     } else if (numeroPecasDoJogador2 == 0) {
-        apresentarMensagem("FIM: jogador 2 venceu");
+        apresentarMensagem("---> FIM: Jogador 2 Venceu! ;D ");
         exit(0);
     }
 }
@@ -307,11 +308,11 @@ void podeJogarOuNao() {
 
     if (podeJogarJogador1 == 0 && podeJogarJogador2 == 0 && numeroPecasNoMonte == 0) {
         if (numeroPecasDoJogador1 < numeroPecasDoJogador2) {
-            apresentarMensagem("Nenhum jogador pode jogar. Jogador 1 venceu com menos pecas.");
+            apresentarMensagem("-> Nenhum Jogador pode jogar. Jogador 1 Venceu com menos Pecas! ");
         } else if (numeroPecasDoJogador2 < numeroPecasDoJogador1) {
-            apresentarMensagem("Nenhum jogador pode jogar. Jogador 2 venceu com menos pecas.");
+            apresentarMensagem("-> Nenhum Jogador pode jogar. Jogador 2 Venceu com menos Pecas! ");
         } else {
-            apresentarMensagem("Nenhum jogador pode jogar. O jogo terminou empatado.");
+            apresentarMensagem("-> Nenhum Jogador pode jogar. O Jogo terminou empatado. :D ");
         }
         exit(0);
     }
@@ -323,7 +324,7 @@ void jogada() {
 
     mostrarPecasPossiveis(jogador1, jogador2, jvez);
 
-    apresentarMensagem("Escolha a peca (digite a letra): ");
+    apresentarMensagem("\n-> Escolha a peca (digite a letra): \n");
     escanearEscolha();
     
 
@@ -334,7 +335,7 @@ void jogada() {
             jogador1[indicePecaEscolhida] = jogador1[numeroPecasDoJogador1 - 1]; //Remove a peca escolhida do leque, substituindo-a pela última peça
             numeroPecasDoJogador1--; //Reduz uma peca do leque do jogador 1
         } else {
-            apresentarMensagem("Nao pode.");
+            apresentarMensagem("\n-> Jogada Invalida!\n");
             return;
         }
     } else {
@@ -344,7 +345,7 @@ void jogada() {
             jogador2[indicePecaEscolhida] = jogador2[numeroPecasDoJogador2 - 1];
             numeroPecasDoJogador2--;
         } else {
-            apresentarMensagem("Nao pode.");
+            apresentarMensagem("\n-> Jogada Invalida!");
             return;
         }
     }
@@ -356,7 +357,7 @@ void jogada() {
         (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita)) {
    /*Verifica se a peca escolhida pode ser jogada tanto no lado esquerdo quanto no lado direito da mesa. 
 	Se for o caso, o jogador pode escolher em qual lado jogar.*/
-        apresentarMensagem("'e' para esquerda ou 'd' para direita: ");
+        apresentarMensagem("\n-> Escolha: 'e' Para jogar na esquerda da mesa, ou 'd' Para jogar na direita da mesa: \n");
         limparBuffer();
         escanearLadoEscolhido();
 
@@ -379,7 +380,7 @@ void jogada() {
             mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida; //Se for necessario inverter a peca, sera adicionada a direita, sem mover as outras pecas
             mesa.posicaoLivreMesa++;
         } else {
-            apresentarMensagem("Nao pode.");
+            apresentarMensagem("\n-> Jogada Invalida!");
             return;
         }
     } else if (pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) { //Somente podera ser jogada na esquerda
@@ -400,7 +401,7 @@ void jogada() {
         mesa.pecasNaMesa[mesa.posicaoLivreMesa] = pecaEscolhida;
         mesa.posicaoLivreMesa++;
     } else {
-        apresentarMensagem("Nao pode.");
+        apresentarMensagem("\n-> Jogada Invalida!");
         return;
     }
     
@@ -413,10 +414,10 @@ void jogada() {
     // Troca vez
     if (jvez == 'J') {
         jvez = 'j';
-        apresentarMensagem("Jogador 1 jogou.\n");
+        apresentarMensagem("\n-> Jogador 1 jogou!\n");
     } else {
         jvez = 'J';
-        apresentarMensagem("Jogador 2 jogou.\n");
+        apresentarMensagem("\n-> Jogador 2 jogou!\n");
     }
 
     atualizaPecas(jvez);
@@ -431,7 +432,7 @@ void gravaCadastro() {
     fps = fopen("CAD_JOGO.dat", "wb");
 
     if (fp == NULL || fpm == NULL || fps == NULL) {
-        printf("Erro ao abrir arquivos para gravacao.\n");
+        printf("-> Erro ao abrir arquivos de Gravacao.\n");
         return;
     }
 
@@ -463,7 +464,7 @@ void gravaCadastro() {
     fclose(fpm);
     fclose(fps);
 
-    apresentarMensagem("Cadastro gravado com sucesso!\n");
+    apresentarMensagem("-> Cadastro gravado com sucesso!\n");
 }
 
 void recuperaCadastro() {
@@ -476,7 +477,7 @@ void recuperaCadastro() {
     fps = fopen("CAD_JOGO.dat", "rb");
     
      if (fp == NULL || fpm == NULL || fps == NULL) {
-        apresentarMensagem("Nenhum jogo salvo encontrado.\n");
+        apresentarMensagem("-> Nenhum jogo salvo encontrado.\n");
         return;
     }
 
@@ -508,7 +509,7 @@ void recuperaCadastro() {
 	}
 
     // Atualiza a apresentacao da mesa e das pecas dos jogadores
-    apresentarMensagem("Cadastro recuperado com sucesso!\n");
+    apresentarMensagem("-> Cadastro recuperado com sucesso!\n");
     apresentarMesa();
     atualizaPecas(jvez);
     subMenu();
