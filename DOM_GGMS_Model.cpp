@@ -58,11 +58,4 @@ struct Jogo {
     int mesaEJogo;       // Extremidade esquerda da mesa
 } sitJogo;               // Variável global da situação do jogo
 
-// Inicialize a estrutura Jogo com valores padrão
-void inicializaJogo() {
-    sitJogo.qtMesaJogo = 0;
-    sitJogo.jogadorJogo = 1;
-    sitJogo.jogadorComp = 0;  
-    sitJogo.mesaDJogo = -1;   
-    sitJogo.mesaEJogo = -1;   
-}
+
