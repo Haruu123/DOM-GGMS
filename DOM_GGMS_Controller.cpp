@@ -157,17 +157,17 @@ void menuGeral() {
                 break;
             case 2:
             	regrasGerais();
+            	break;
             case 3:
             	if (mesa.posicaoLivreMesa == 0) {
-                    apresentarMensagem("\nNao ha nenhum jogo disponivel para salvar.\n");
+                    apresentarMensagem("\nNenhum jogo esta disponivel para salvar.\n");
                     menuGeral();
                 } else {
                     gravaCadastro();
                 }
                 break;
             case 4:
-            	recuperaCadastro();
-            	break;
+                recuperaCadastro();
             default:
                 mensagemOpInvalida();
                 break;
@@ -321,7 +321,6 @@ void jogada() {
     tipopeca pecaEscolhida;
     int indicePecaEscolhida;
 
-
     mostrarPecasPossiveis(jogador1, jogador2, jvez);
 
     apresentarMensagem("Escolha a peca (digite a letra): ");
@@ -414,8 +413,10 @@ void jogada() {
     // Troca vez
     if (jvez == 'J') {
         jvez = 'j';
+        apresentarMensagem("Jogador 1 jogou.\n");
     } else {
         jvez = 'J';
+        apresentarMensagem("Jogador 2 jogou.\n");
     }
 
     atualizaPecas(jvez);
@@ -465,17 +466,17 @@ void gravaCadastro() {
     apresentarMensagem("Cadastro gravado com sucesso!\n");
 }
 
-
 void recuperaCadastro() {
+    
     FILE *fp, *fpm, *fps;
 
     // Abrir os arquivos para leitura
     fp = fopen("CAD_DOMINO.dat", "rb");
     fpm = fopen("CAD_MESA.dat", "rb");
     fps = fopen("CAD_JOGO.dat", "rb");
-
-    if (fp == NULL || fpm == NULL || fps == NULL) {
-        printf("Erro ao abrir arquivos para leitura.\n");
+    
+     if (fp == NULL || fpm == NULL || fps == NULL) {
+        apresentarMensagem("Nenhum jogo salvo encontrado.\n");
         return;
     }
 
@@ -490,16 +491,15 @@ void recuperaCadastro() {
 	fread le do arquivo fpm um total de 1 peca, com o tamanho de sizeof(int),
 	e armazena esse elemento na memoria no endereco &mesa.posicaoLivreMesa */
 
-
     fread(&sitJogo, sizeof(Jogo), 1, fps);
 
-  
+    // Fechar os arquivos
     fclose(fp);
     fclose(fpm);
     fclose(fps);
 
     mesa.mesaD = sitJogo.mesaDJogo; //Atualiza o estado atual do jogo
-    mesa.mesaE = sitJogo.mesaEJogo;
+	mesa.mesaE = sitJogo.mesaEJogo;
 
 	if (sitJogo.jogadorJogo == 1) {
     	jvez = 'J';	
