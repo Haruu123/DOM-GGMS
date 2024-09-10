@@ -7,6 +7,7 @@
 
 #include "DOM_GGMS_View.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void fMostra(tipopeca pecas[], int n) {
     for (int i = 0; i < n; i++) {
@@ -52,6 +53,7 @@ int apresentarMenuGeral() {
     printf("0 - Sair do programa\n");
     printf("Opcao selecionada: ");
     scanf("%d", &op);
+    system("cls");
     return op;
 }
 
