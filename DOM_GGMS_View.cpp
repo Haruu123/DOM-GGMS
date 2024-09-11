@@ -9,26 +9,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void fMostra(tipopeca pecas[], int n) {
+void fMostra(tipopeca pecas[], int n){
     for (int i = 0; i < n; i++) {
         printf("[%d|%d] ", pecas[i].lado1, pecas[i].lado2);
     }
     printf("\n\n");
 }
 
-void mensagemSair()
-{
+void mensagemSair(){
 	printf("Saindo do jogo.\n");
 }
 
-
-void mensagemOpInvalida()
-{
+void mensagemOpInvalida(){
 	printf("Opcao invalida. Tente novamente.\n\n");
 }
 
-
-void apresentarMesa() {
+void apresentarMesa(){
     printf("===========\n\n");
     printf("MESA: ");
     for (int i = 0; i < mesa.posicaoLivreMesa; i++) {
@@ -37,16 +33,15 @@ void apresentarMesa() {
     printf("\n\n==========\n");
 }
 
-
 void mensagemMonteVazio(){
     printf("Nao ha mais pecas no monte para comprar!");
 }
 
-int apresentarMenuGeral() {
+int apresentarMenuGeral(){
     int op;
     printf("1 - Iniciar jogo (2 jogadores)\n");
-//    printf("2 - Iniciar jogo (contra o computador)\n");
-//    printf("3 - Retornar ao jogo interrompido\n");
+	//printf("2 - Iniciar jogo (contra o computador)\n");
+	//printf("3 - Retornar ao jogo interrompido\n");
     printf("2 - Regras gerais do Jogo\n");
     printf("3 - Salvar o jogo\n");
     printf("4 - Recuperar o jogo salvo\n");
@@ -57,9 +52,7 @@ int apresentarMenuGeral() {
     return op;
 }
 
-
-void regrasGerais()
-{
+void regrasGerais(){
     printf("\nREGRAS GERAIS\n");
     printf("\nINICIO = Cada jogador comeca com 7 pecas distribuidas aleatoriamente. ");
     printf("Quem possuir a peca [6|6] inicia o jogo, mas caso ninguem a tenha, joga-se a dupla mais alta do leque.\n");
@@ -83,12 +76,12 @@ void regrasGerais()
     
 }
 
-int apresentarSubMenu() {
+int apresentarSubMenu(){
     char op2;
 	printf(" j - fazer a jogada\n");
 	printf(" c - comprar pecas\n");
 	printf(" p - passar a vez\n");
-	printf(" s - sair (interromper o jogo)\n");
+	printf(" s - sair (sair sem salvar jogo)\n");
 	printf("Opcao selecionada: ");
 	limparBuffer();
 	scanf(" %c", &op2);
@@ -99,17 +92,14 @@ void apresentarMensagem(const char mens[100]){
 	printf("%s\n",mens);
 }
 
-void escanearLadoEscolhido()
-{
+void escanearLadoEscolhido(){	
 	scanf(" %c", &ladoEscolhido);
 }
 
-void escanearEscolha()
-{
+void escanearEscolha(){
 	scanf(" %c", &escolha);
 }
 
-void apresentarPeca(char indice, int lado1, int lado2)
-{
+void apresentarPeca(char indice, int lado1, int lado2){
 	printf("%c. [%d|%d] ", indice, lado1, lado2);
 }
