@@ -27,6 +27,11 @@ void fEmbaralha(tipopeca pecas[28]){
 }
  
 void iniciarJogo(){
+	mesa.posicaoLivreMesa = 0;
+    for (int i = 0; i < 28; i++) {
+        mesa.pecasNaMesa[i].lado1 = -1;
+        mesa.pecasNaMesa[i].lado2 = -1;
+    }
     fEmbaralha(pecas);
     distribuiPecas(pecas);
     primeiroLance();
