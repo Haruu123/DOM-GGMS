@@ -5,11 +5,11 @@
 //Matheus Gomes Costa Castanho Giacomini
 //Sthefany Viveiros Cordeiro
 
-//Estrutura tipo peca
+//estrutura tipo peca
 typedef struct {
     int lado1;
     int lado2;
-    char status;  //NULL = indisponivel, 1 = player1, 2 = player2, M = localizado na mesa
+    char status; //NULL = indisponivel, 1 = player1, 2 = player2, M = localizado na mesa
 } tipopeca;
 
 typedef struct {
@@ -21,3 +21,4 @@ typedef struct {
 
 void fCriar(tipopeca pecas[28]);
 void distribuiPecas(tipopeca pecas[28]);
+
