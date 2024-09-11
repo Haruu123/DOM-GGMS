@@ -430,9 +430,9 @@ void gravaCadastro(){
     fps = fopen("CAD_JOGO.dat", "wb");
 
     if (fp == NULL || fpm == NULL || fps == NULL) {
-        printf("-> Erro ao abrir arquivos de Gravacao.\n");
+        apresentarMensagem("-> Nenhum jogo salvo encontrado.\n");
         return;
-    }
+	}
 
     //Todas as 28 pecas sao armazenadas no arquivo CAD_DOMINO 
     fwrite(pecas, sizeof(tipopeca), 28, fp);
