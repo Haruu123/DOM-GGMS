@@ -17,5 +17,3 @@ void apresentarMensagem(const char mens[100]);
 void apresentarPeca(char indice, int lado1, int lado2);
 void escanearLadoEscolhido();
 void escanearEscolha();
-
-
