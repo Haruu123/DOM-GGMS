@@ -1,4 +1,4 @@
-//DOM-GGMS-Projeto.cpp - Projeto Dominó - Etapa 3
+//DOM-GGMS-Projeto.cpp - Projeto Dominó - Etapa 5
 //09/08/2024 - Grupo: GGMS
 //Gabriel Azevedo Cruz 
 //Giulia Meninel Mattedi
