@@ -20,3 +20,4 @@ void jogada();
 void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jogadorAtivo);
 void recuperaCadastro();
 void gravaCadastro();
+
