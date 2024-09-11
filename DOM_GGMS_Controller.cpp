@@ -16,7 +16,7 @@ void jogo(){
 	iniciarJogo();   
 }
  
-void fEmbaralha(tipopeca pecas[28]) {
+void fEmbaralha(tipopeca pecas[28]){
     srand(time(NULL));
     for (int i = 0; i < 28; i++) {
         int j = rand() % 28;
@@ -26,13 +26,13 @@ void fEmbaralha(tipopeca pecas[28]) {
     }
 }
  
-void iniciarJogo() {
+void iniciarJogo(){
     fEmbaralha(pecas);
     distribuiPecas(pecas);
     primeiroLance();
 }
  
-void colocarPecaNaMesa(tipopeca peca) {
+void colocarPecaNaMesa(tipopeca peca){
     if (mesa.posicaoLivreMesa < 28) { //A mesa so pode ter 28 pecas, entao mesa.posicaoLivreMesa avalia se ha espaco para novas pecas
         mesa.pecasNaMesa[mesa.posicaoLivreMesa] = peca; //pecasNaMesa e' uma array de 28 slots (pecas). Se houver espaco, 'peca' e' adicionada a posicao de mesa.posicaoLivreMesa
         mesa.posicaoLivreMesa++; //Depois de alocar espaco para uma peca, mesa.posicaoLivreMesa e' incrementada para disponibilizar uma proxima posicao 
@@ -40,16 +40,14 @@ void colocarPecaNaMesa(tipopeca peca) {
 }
 //Exclusao da inicializacao em 0 de mesa.posicaoLivreMesa = como sempre inicializava em 0, impedia a adicao de novas pecas a mesa
  
-void primeiroLance() {
+void primeiroLance(){
     int i, pj, dupla;
     pj = -1;
     dupla = -1;
     tipopeca pecaJogada;
  
-    // Procurar a maior dupla:
-/* Se os lados da peca escolhida forem iguais, pj recebe o indice da peca e dupla, seu valor. A comparacao com -1 e' realizada para determinar se a dupla
-existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a maior soma disponivel.
-*/
+	/* Se os lados da peca escolhida forem iguais, pj recebe o indice da peca e dupla, seu valor. A comparacao com -1 e' realizada para determinar se a dupla
+	existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a maior soma disponivel.*/
     for (i = 0; i < 7; i++) {
         if (jogador1[i].lado1 == jogador1[i].lado2 && jogador1[i].lado1 > dupla) {
             dupla = jogador1[i].lado1;
@@ -63,7 +61,7 @@ existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a m
         }
     }
  
-    // Se nao tiver dupla, procurar a peca com a maior soma
+    //Se nao tiver dupla, procurar a peca com a maior soma
     if (pj == -1) {
         dupla = 0;
         for (i = 0; i < 7; i++) {
@@ -80,8 +78,7 @@ existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a m
         }
     }
  
- /* Se jvez = 'J', pecaJogada (tipopeca) torna-se a peca de maior dupla/soma, e o numero de pecas do jogador 1 reduz em uma unidade. E vice-versa.
- */
+ 	/*Se jvez = 'J', pecaJogada (tipopeca) torna-se a peca de maior dupla/soma, e o numero de pecas do jogador 1 reduz em uma unidade. E vice-versa.*/
     if (jvez == 'J') {
         pecaJogada = jogador1[pj];
         jogador1[pj] = jogador1[numeroPecasDoJogador1 - 1]; // -1 peca do jogador
@@ -104,25 +101,25 @@ existe; caso nao exista, pj == -1, e o algoritmo passa a procurar a peca com a m
         jvez = 'J';
     }
  
-    atualizaPecas(jvez); // pecas de quem jogou
+    atualizaPecas(jvez); //pecas de quem jogou
     subMenu();
     system("cls");
 }
  
-void atualizaPecas(char jvez) {
+void atualizaPecas(char jvez){
     char indice; 
     if (jvez == 'J') {
-    	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 1
-        apresentarMensagem("\n -> Pecas do jogador 1:\n\n");
+    	indice = 'a'; //Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 1
+        apresentarMensagem("\n-> Pecas do jogador 1:\n\n");
         for (int i = 0; i < numeroPecasDoJogador1; i++) { // pecas do jogador 1
             apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
             indice++;
         }
         apresentarMensagem("\n");
     } else {
-    	indice = 'a'; // Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 2
-        apresentarMensagem("\n -> Pecas do jogador 2:\n\n");
-        for (int i = 0; i < numeroPecasDoJogador2; i++) { // pecas do jogador 2
+    	indice = 'a'; //Inicializa a ordem de rotulacao das pecas em letras alfabeticas para o jogador 2
+        apresentarMensagem("\n-> Pecas do jogador 2:\n\n");
+        for (int i = 0; i < numeroPecasDoJogador2; i++) { //pecas do jogador 2
             apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
             indice++;
         }
@@ -130,11 +127,11 @@ void atualizaPecas(char jvez) {
     }
 }
  
-void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int &numeroPecasDoJogador) {
+void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int &numeroPecasDoJogador){
 
     if (numeroPecasNoMonte > 0) {
         jogador[numeroPecasDoJogador] = monte[numeroPecasNoMonte - 1];
-        jogador[numeroPecasDoJogador].status = 'J'; // peca era D virou J : pertence ao jogador
+        jogador[numeroPecasDoJogador].status = 'J'; //Peca era D virou J : pertence ao jogador
         numeroPecasDoJogador++;
         numeroPecasNoMonte--;
     } else {
@@ -142,10 +139,10 @@ void fComprar(tipopeca monte[], int &numeroPecasNoMonte, tipopeca jogador[], int
     }
     system("cls");
     printf("-> Compra efetuada! \n");
-    apresentarMesa(); // mostrar a mesa atualizada
+    apresentarMesa(); //Mostrar a mesa atualizada
 } 
  
-void menuGeral() {
+void menuGeral(){
     int op;
     do {
 		op = apresentarMenuGeral();
@@ -176,12 +173,12 @@ void menuGeral() {
     } while (op != 0);
 }
  
-void limparBuffer() {
+void limparBuffer(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void subMenu() {
+void subMenu(){
     char op2;
     do {
         op2 = apresentarSubMenu();
@@ -199,17 +196,18 @@ void subMenu() {
                 break;
             case 'p':
                 if (jvez == 'J') {
-                    jvez = 'j'; // passa a vez para o jogador 2
+                    jvez = 'j'; //Passa a vez para o jogador 2
                     system("cls");
                 } else {
-                    jvez = 'J'; // Passa a vez para o jogador 1
+                    jvez = 'J'; //Passa a vez para o jogador 1
                     system("cls");                 
                 }
                 apresentarMensagem("-> Jogador passou a vez. ");
                 apresentarMesa();
-                atualizaPecas(jvez); // atualiza as peças para o jogador que agora tem a vez
+                atualizaPecas(jvez); //Atualiza as peças para o jogador que agora tem a vez
                 break;
             case 's':
+            	system("cls"); 
                 menuGeral();
                 break;
             default:
@@ -219,22 +217,22 @@ void subMenu() {
     } while (op2 != 's');
 }
 
-void inverterPeca(tipopeca &peca) {
+void inverterPeca(tipopeca &peca){
     int temp = peca.lado1;
     peca.lado1 = peca.lado2;
     peca.lado2 = temp;
 }
 
-void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) {
+void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez){
     int mesaE, mesaD;
-    int jogadaValida = 0; //nenhuma peça jogavel encontrada ainda
+    int jogadaValida = 0; //Nenhuma peça jogavel encontrada ainda
     char indice;
 
     if (mesa.posicaoLivreMesa > 0) {
         mesaE = mesa.pecasNaMesa[0].lado1;
         mesaD = mesa.pecasNaMesa[mesa.posicaoLivreMesa - 1].lado2;
     } else {
-        mesaE = mesaD = -1; // mesa vazia
+        mesaE = mesaD = -1; //Mesa vazia
     }
 
     if (jvez == 'J') {
@@ -244,7 +242,7 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
                 jogador1[i].lado1 == mesaD || jogador1[i].lado2 == mesaD) {
                 if (!jogadaValida) //Se uma peça valida for encontrada, if (!jogadaValida) é verdadeiro pois !0 = 1 (verdadeiro)
 				{
-                    apresentarMensagem("\n -> Pecas Possiveis do Jogador 1: \n");
+                    apresentarMensagem("\n*Pecas Possiveis do Jogador 1: \n");
                 }
                 apresentarPeca(indice, jogador1[i].lado1, jogador1[i].lado2);
                 jogadaValida = 1;
@@ -257,7 +255,7 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
             if (jogador2[i].lado1 == mesaE || jogador2[i].lado2 == mesaE || 
                 jogador2[i].lado1 == mesaD || jogador2[i].lado2 == mesaD) {
                 if (!jogadaValida) {
-                    apresentarMensagem("\n -> Pecas Possiveis do Jogador 2: \n");
+                    apresentarMensagem("\n*Pecas Possiveis do Jogador 2: \n");
                 }
                 apresentarPeca(indice, jogador2[i].lado1, jogador2[i].lado2);
                 jogadaValida = 1;
@@ -267,13 +265,13 @@ void mostrarPecasPossiveis(tipopeca jogador1[], tipopeca jogador2[], char jvez) 
     } 
     
     if (!jogadaValida) {
-        apresentarMensagem("\n -> Nao possui Pecas Jogaveis, compre pecas.\n");
+        apresentarMensagem("\n-> Nao possui Pecas Jogaveis, compre pecas.\n");
         subMenu();
     }
     apresentarMensagem("\n");
 }
 
-void vencedor() {
+void vencedor(){
     if (numeroPecasDoJogador1 == 0) {
         apresentarMensagem("---> FIM: Jogador 1 Venceu! ;D ");
         exit(0);
@@ -283,7 +281,7 @@ void vencedor() {
     }
 }
 
-void podeJogarOuNao() {
+void podeJogarOuNao(){
     int podeJogarJogador1 = 0;
     int podeJogarJogador2 = 0;
 
@@ -318,7 +316,7 @@ void podeJogarOuNao() {
     }
 }
 
-void jogada() {
+void jogada(){
     tipopeca pecaEscolhida;
     int indicePecaEscolhida;
 
@@ -355,7 +353,7 @@ void jogada() {
 
     if ((pecaEscolhida.lado1 == ladoMesaEsquerda || pecaEscolhida.lado2 == ladoMesaEsquerda) && 
         (pecaEscolhida.lado1 == ladoMesaDireita || pecaEscolhida.lado2 == ladoMesaDireita)) {
-   /*Verifica se a peca escolhida pode ser jogada tanto no lado esquerdo quanto no lado direito da mesa. 
+    /*Verifica se a peca escolhida pode ser jogada tanto no lado esquerdo quanto no lado direito da mesa. 
 	Se for o caso, o jogador pode escolher em qual lado jogar.*/
         apresentarMensagem("\n-> Escolha: 'e' Para jogar na esquerda da mesa, ou 'd' Para jogar na direita da mesa: \n");
         limparBuffer();
@@ -411,7 +409,7 @@ void jogada() {
     vencedor();
     podeJogarOuNao();
 
-    // Troca vez
+    //Troca vez
     if (jvez == 'J') {
         jvez = 'j';
         apresentarMensagem("\n-> Jogador 1 jogou!\n");
@@ -423,10 +421,10 @@ void jogada() {
     atualizaPecas(jvez);
 }
 
-void gravaCadastro() {
+void gravaCadastro(){
     FILE *fp, *fpm, *fps;
 
-    // Abrindo os arquivos para gravação
+    //Abrindo os arquivos para gravação
     fp = fopen("CAD_DOMINO.dat", "wb");
     fpm = fopen("CAD_MESA.dat", "wb");
     fps = fopen("CAD_JOGO.dat", "wb");
@@ -436,16 +434,16 @@ void gravaCadastro() {
         return;
     }
 
-    // Todas as 28 pecas sao armazenadas no arquivo CAD_DOMINO 
+    //Todas as 28 pecas sao armazenadas no arquivo CAD_DOMINO 
     fwrite(pecas, sizeof(tipopeca), 28, fp);
 
-    // Todas as pecas da mesa sao armazenadas no arquivo CAD_MESA
+    //Todas as pecas da mesa sao armazenadas no arquivo CAD_MESA
     fwrite(mesa.pecasNaMesa, sizeof(tipopeca), mesa.posicaoLivreMesa, fpm);
 
     //A posicao livre da mesa e' gravada no arquivo CAD_MESA
     fwrite(&mesa.posicaoLivreMesa, sizeof(int), 1, fpm);
 
-    // Atualiza a estrutura sit.Jogo com outras variaveis para indicar o estado atual da partida
+    //Atualiza a estrutura sit.Jogo com outras variaveis para indicar o estado atual da partida
     sitJogo.qtMesaJogo = mesa.posicaoLivreMesa;
     sitJogo.mesaDJogo = mesa.mesaD;
     sitJogo.mesaEJogo = mesa.mesaE;
@@ -456,10 +454,10 @@ void gravaCadastro() {
     	jvez = 'j';
 	}
 
-    // A estrutura sitJogo e' armazenada no arquivo CAD_JOGO
+    //A estrutura sitJogo e' armazenada no arquivo CAD_JOGO
     fwrite(&sitJogo, sizeof(Jogo), 1, fps);
 
-    // Fechar os arquivos
+    //Fechar os arquivos
     fclose(fp);
     fclose(fpm);
     fclose(fps);
@@ -467,11 +465,11 @@ void gravaCadastro() {
     apresentarMensagem("-> Cadastro gravado com sucesso!\n");
 }
 
-void recuperaCadastro() {
+void recuperaCadastro(){
     
     FILE *fp, *fpm, *fps;
 
-    // Abrir os arquivos para leitura
+    //Abrir os arquivos para leitura
     fp = fopen("CAD_DOMINO.dat", "rb");
     fpm = fopen("CAD_MESA.dat", "rb");
     fps = fopen("CAD_JOGO.dat", "rb");
@@ -483,7 +481,8 @@ void recuperaCadastro() {
 
     fread(pecas, sizeof(tipopeca), 28, fp); 
 
-    fread(mesa.pecasNaMesa, sizeof(tipopeca), 28, fpm); /*fread le do arquivo fpm um total de 28 pecas, 
+    fread(mesa.pecasNaMesa, sizeof(tipopeca), 28, fpm); 
+	/*fread le do arquivo fpm um total de 28 pecas, 
     cada um com o tamanho de sizeof(tipopeca), e armazena essas pecas na memória
 	comecando no endereço mesa.pecasNaMesa*/
 	
@@ -494,7 +493,7 @@ void recuperaCadastro() {
 
     fread(&sitJogo, sizeof(Jogo), 1, fps);
 
-    // Fechar os arquivos
+    //Fechar os arquivos
     fclose(fp);
     fclose(fpm);
     fclose(fps);
@@ -508,10 +507,9 @@ void recuperaCadastro() {
     	jvez = 'j';
 	}
 
-    // Atualiza a apresentacao da mesa e das pecas dos jogadores
+    //Atualiza a apresentacao da mesa e das pecas dos jogadores
     apresentarMensagem("-> Cadastro recuperado com sucesso!\n");
     apresentarMesa();
     atualizaPecas(jvez);
     subMenu();
 }
-
